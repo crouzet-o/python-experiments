@@ -1,0 +1,32 @@
+
+# Test pour un switch / case type of control
+
+fonts = pygame.font.get_fonts()
+if debug==1:
+	print fonts
+
+def switch_ar():
+	myexpefont = pygame.font.match_font('timesnewroman,arial,tholoth,scheherazade,tholoth,kacstqurn')
+	myexpefontsize = 88
+	textdirection='RTL'
+
+def switch_jp():
+	myexpefont = pygame.font.match_font('freeserif,times,freesans,arial')
+	myexpefontsize = 38
+	textdirection='LTR'
+
+def swith_default():
+	myexpefont = pygame.font.match_font('freeserif,times,freesans,arial')
+	myexpefontsize = 38
+	textdirection='LTR'
+
+def lang_switcher(language):
+    switcher = {
+        1:'ar',
+        2:'jp'
+        }
+    # Get the function from the switcher dictionary
+    func = switcher.get(language, lambda: "Invalide language argument")
+    # Execution
+    print func()
+

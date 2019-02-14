@@ -1,0 +1,2 @@
+sudo cp *.ttf /usr/share/fonts/truetype/
+sudo fc-cache -fv

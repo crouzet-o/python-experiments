@@ -1,0 +1,5 @@
+ 
+Pour lancer le programme il faut copier la ligne de commande suivante :
+
+./progression.py --fontsize 40 --col 4 --sylls 5 --id loc1 --rep 2 --timepersyll 140 --blocksize 20 --isi 500 VCV_3V_19C.csv 
+

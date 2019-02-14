@@ -1,0 +1,19 @@
+Packages à installer :
+
+python-argparse
+python-alsaaudio
+python-pygame
+python-scipy
+python-wxgtk*
+
+
+
+Exécution du protocole :
+
+./nAFC.py --h
+
+./nAFC.py --id sujet1 --expe C
+
+./nAFC.py --id sujet1 --expe V
+
+
