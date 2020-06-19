@@ -170,7 +170,7 @@ def main():
 	# Blit everything to the screen (Launch the display)
 #	screen.blit(background, (0, 0))
 #	pygame.display.flip()
-	if debug == 0: pygame.display.toggle_fullscreen() # Can't quit with keys in fullscreen mode
+	if debug == 0: pygame.display.toggle_fullscreen() # Really necessary?
 
 	stimuli = pyl.read_data_2D(infile,csvsep,1)
 	print len(stimuli)
@@ -181,7 +181,7 @@ def main():
 		random.shuffle(stimuli)
 		if debug==1:
 			print j
-		runtheexperiment(stimuli,column)
+		runtheexperiment(stimuli, column)
 	
 	endsplash()
 
@@ -199,7 +199,7 @@ def runthetraining():
 	pygame.time.delay(3000)
 
 
-def runtheexperiment(data,displaycol):
+def runtheexperiment(data, displaycol):
 	trial = 0
 	for i in range(0,len(data)):
 		catchpause()

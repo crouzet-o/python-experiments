@@ -1,0 +1,169 @@
+PairID;TWord;SContext;Word;Freq_Brulex;Freq_lexique_FastSearch;Freq_lexique_Frantext;CVstruct;V_pair;Pb;Subject;Similarity_Subject_Word;Verb;Similarity_Verb_Word;Similarity_Subject_Verb;Carrier;Phrase;Translation (à vérifier absolument !);Nbsylls
+1;Word1;Context1;bac;269;10035;11.29;CVC;a/E;;étudiant;0.202;préparer;0.261;262;L'étudiant a préparé le;L'étudiant a préparé le bac.;The student has prepared the tray;9
+2;Word1;Context1;bâche;246;438;7.32;CVC;a/E;;polyéthylène;0.397;plastifier;0.389;422;Le polyéthylène a plastifié la;Le polyéthylène a plastifié la bâche.;The worker laminated the tarpaulin;11
+6;Word1;Context1;balle;357;6722;60.84;CVC;a/E;;joueur;0.374;dévier;0.334;172;Le joueur a dévié la;Le joueur a dévié la balle.;The player deflected the ball;7
+10;Word1;Context1;datte;222;272;2.19;CVC;a/E;;amande;0.487;fourrer;0.373;467;L’amande fourre une;L’amande fourre une datte.;The chief pitted a date;5
+11;Word1;Context1;gare;258;9574;53.55;CVC;a/E;;train;0.707;desservir;0.503;371;Le train dessert une;Le train dessert une gare.;Workers electrified a station;6
+12;Word1;Context1;mâche;69;218;1.58;CVC;a/E;;cuisinier;0.053;assaisonner;0.413;92;Le cuisinier a assaisonné cette;Le cuisinier a assaisonné cette mâche.;The cook seasoned this lamb's lettuce;10
+13;Word1;Context1;mare;290;1814;7.68;CVC;a/E;;crapaud;0.413;coasser;0.336;494;Les crapauds coassent près de leur;Les crapauds coassent près de leur mare.;Toads croak near their pond;9
+15;Word1;Context1;masse;398;14822;123.33;CVC;a/E;;physicien;0.202;mesurer;0.39;161;Le physicien mesurera la;Le physicien mesurera la masse.;The physicist will measure the mass.;9
+16;Word1;Context1;nage;257;1522;6.33;CVC;a/E;;entraîneur;0.161;chronométrer;0.316;149;L'entraîneur a chronométré la;L'entraîneur a chronométré la nage.;The coach has timed the swim.;10
+17;Word1;Context1;pagne;218;187;1.19;CVC;a/E;;couturière;0.288;broder;0.402;474;Les couturières ont brodé le;Les couturières ont brodé le pagne.;The natives are draped with a loincloth;9
+20;Word1;Context1;panne;283;4513;10.16;CVC;a/E;;garagiste;0.373;Réparer;0.476;424;Le garagiste répare une;Le garagiste répare une panne.;The mechanic repairs a breakdown;8
+21;Word1;Context1;salle;418;47286;145.49;CVC;a/E;;double-vitrage;0.146;insonoriser;0.396;205;Le double-vitrage insonorise la;Le double-vitrage insonorise la salle.;The double-glazed windows soundproof the room;11
+22;Word1;Context1;vanne;209;2814;6.97;CVC;a/E;;plombier;0.14;raccorder;0.315;117;Le plombier a raccordé la;Le plombier a raccordé la vanne.;The plumber connected the valve.;10
+23;Word1;Context1;bal;326;3401;17.2;CVC;a/O;;musique;0.3;rythmer;0.288;0.13;La musique a rythmé le;La musique a rythmé le bal.;The music punctuated the ball.;10
+24;Word1;Context1;bar;333;15317;36.29;CVC;a/O;;cocktails;0.451;siroter;0.454;442;Les cocktails sont sirotés près du;Les cocktails sont sirotés près du bar.;Tourists have restored near the bar;10
+27;Word1;Context1;cale;246;1284;8.71;CVC;a/O;;pirate;0.164;éperonner;0.308;227;Les pirates ont éperonné la;Les pirates ont éperonné la cale.;The pirates spurred the hold.;10
+28;Word1;Context1;date;371;137621;73.23;CVC;a/O;;invitation;0.128;préciser;0.323;148;L’invitation a précisé la;L’invitation a précisé la date.;The invitation specified the date.;10
+29;Word1;Context1;gamme;286;21153;15.38;CVC;a/O;;marque;0.42;concevoir;0.395;232;La marque a conçu la nouvelle;La marque a conçu la nouvelle gamme.;The brand has designed a new range.;10
+31;Word1;Context1;mare;290;1814;7.68;CVC;a/O;;vergers;0.258;assécher;0.337;127;Les vergers ont asséché les;Les vergers ont asséché les mare.;The peasants have dried up the ponds.;10
+32;Word1;Context1;nasse;195;142;1.23;CVC;a/O;;troupe;0.112;acculer;0.257;263;Les troupes ont été acculées dans la;Les troupes ont été acculées dans la nasse.;The troops were cornered in the trap.;10
+33;Word1;Context1;natte;283;309;5.49;CVC;a/O;;filles;0.199;enrubanner;0.289;169;Les filles enrubannaient leurs;Les filles enrubannaient leurs natte.;The girls wrapped their mats.;10
+34;Word1;Context1;quart;377;9923;55.46;CVC;a/O;;équipe;0.188;disputer;0.393;325;L’équipe dispute le;L’équipe dispute le quart.;The team plays the quarter.;10
+37;Word1;Context1;jeu;432;92111;248.23;CV;2/y;;enfant;0.178;amuser;0.413;234;Les enfants s’amusent avec le;Les enfants s’amusent avec le jeu.;Children have fun with the game;10
+38;Word1;Context1;noeud;336;3130;23.22;CV;2/y;;marin;0.146;défaire;0.32;47;Le marin défaisait un;Le marin défaisait un noeud.;The sailor undid a knot.;10
+40;Word1;Context1;faux;-2;16616;103.81;CV;o/u;;faussaires;0.214;multiplier;0.248;62;Les faussaires multiplient les;Les faussaires multiplient les faux.;Smugglers multiply fake.;10
+41;Word1;Context1;lot;304;10279;16.87;CV;o/u;;enchère;0.263;gagner;0.234;203;L’enchère a gagné le;L’enchère a gagné le lot.;The auctioneer sold the lot;10
+43;Word1;Context1;peau;395;11281;116.26;CV;o/u;;crème;0.391;hydrater;0.656;398;La crème hydrate les;La crème hydrate les peau.;The cream moisturizes the skin.;10
+46;Word1;Context1;sceau;276;2964;17.74;CV;o/u;;notaire;0.208;apposer;0.26;164;Le notaire appose son;Le notaire appose son sceau.;The notary affixes his seal.;10
+1;Word1;Context2;bac;269;10035;11.29;CVC;a/E;;luthier;0.034;évaser;0.027;0.13;Le luthier a évasé le;Le luthier a évasé le bac.;The luthier flared his beak;10
+2;Word1;Context2;bâche;246;438;7.32;CVC;a/E;;fermier;0.114;affûter;0.095;71;Le fermier a affûté la;Le fermier a affûté la bâche.;The farmer sharpened the spade;10
+6;Word1;Context2;balle;357;6722;60.84;CVC;a/E;;prince;0.054;charmer;0.044;402;Le prince a charmé la;Le prince a charmé la balle.;The prince has charmed the beautiful;10
+10;Word1;Context2;datte;222;272;2.19;CVC;a/E;;famille;0.06;rembourser;0.03;83;La famille rembourse une;La famille rembourse une datte.;The family has repaid a debt;10
+11;Word1;Context2;gare;258;9574;53.55;CVC;a/E;;soldat;0.083;fomenter;0.051;252;Les soldats ont fomenté une;Les soldats ont fomenté une gare.;The soldiers fomented a war.;10
+12;Word1;Context2;mâche;69;218;1.58;CVC;a/E;;coiffeur;0.027;défriser;0.063;375;Le coiffeur a défrisé cette;Le coiffeur a défrisé cette mâche.;The hairdresser has straightened this wick.;10
+13;Word1;Context2;mare;290;1814;7.68;CVC;a/E;;enfant;0.09;grandir;0.087;398;Les enfants grandissent près de leur;Les enfants grandissent près de leur mare.;Children grow up near their mother;10
+15;Word1;Context2;masse;398;14822;123.33;CVC;a/E;;prêtre;0.018;célébrer;0.003;452;Le prêtre célèbrera la;Le prêtre célèbrera la masse.;The priest will celebrate Mass.;10
+16;Word1;Context2;nage;257;1522;6.33;CVC;a/E;;montagnard;0.036;déblayer;0.031;102;Le montagnard a déblayé la;Le montagnard a déblayé la nage.;The mountaineer cleared the snow.;10
+17;Word1;Context2;pagne;218;187;1.19;CVC;a/E;;mêches;0.215;recoiffer;0.125;382;Les mèches sont recoiffées avec un;Les mèches sont recoiffées avec un pagne.;Clients are combed with a comb;10
+20;Word1;Context2;panne;283;4513;10.16;CVC;a/E;;criminel;0.023;encourir;0.086;215;Le criminel encourt une;Le criminel encourt une panne.;The criminal incurs a sentence;10
+21;Word1;Context2;salle;418;47286;145.49;CVC;a/E;;cavalier;0.033;enfourcher;0.054;331;Le cavalier enfourche la;Le cavalier enfourche la salle.;The rider rides the saddle;10
+22;Word1;Context2;vanne;209;2814;6.97;CVC;a/E;;médicament;0.053;dilater;0.163;113;Le médicament a dilaté la;Le médicament a dilaté la vanne.;The drug dilated the vein.;10
+23;Word1;Context2;bal;326;3401;17.2;CVC;a/O;;mixeur;0.03;casser;0.059;56;Le mixeur a cassé le;Le mixeur a cassé le bal.;The child broke the bowl.;10
+24;Word1;Context2;bar;333;15317;36.29;CVC;a/O;;marin;0.092;amarrer;0.145;263;Les marins se sont amarrés près du;Les marins se sont amarrés près du bar.;The sailors moored near the edge.;10
+27;Word1;Context2;cale;246;1284;8.71;CVC;a/O;;ébéniste;0.04;poncer;0.269;164;L'ébéniste a poncé la;L'ébéniste a poncé la cale.;The cabinetmaker has sanded the glue.;10
+28;Word1;Context2;date;371;137621;73.23;CVC;a/O;;mari;0.082;épouser;0.03;556;Le mari l’a épousée pour la;Le mari l’a épousée pour la date.;The husband married her for the dowry.;10
+29;Word1;Context2;gamme;286;21153;15.38;CVC;a/O;;additif;0.163;gélifier;0.132;297;L’additif a gélifié la nouvelle;L’additif a gélifié la nouvelle gamme.;Americans chew a new eraser.;10
+31;Word1;Context2;mare;290;1814;7.68;CVC;a/O;;sorcière;0.099;ressusciter;0.074;112;Les sorcières ont ressuscité les;Les sorcières ont ressuscité les mare.;The witches raised the dead.;10
+32;Word1;Context2;nasse;195;142;1.23;CVC;a/O;;événement;-0.002;célébrer;0.044;282;Deux événements ont été célébrés dans la;Deux événements ont été célébrés dans la nasse.;Two events were celebrated in the wedding.;10
+33;Word1;Context2;natte;283;309;5.49;CVC;a/O;;secrétaire;0.038;rédiger;0.004;0.11;Les secrétaires rédigeaient leurs;Les secrétaires rédigeaient leurs natte.;The secretaries wrote their notes.;10
+34;Word1;Context2;quart;377;9923;55.46;CVC;a/O;;eau froide;0.104;vivifer;-0.013;114;L’eau froide vivifie le;L’eau froide vivifie le quart.;Cold water invigorates the body.;10
+37;Word1;Context2;jeu;432;92111;248.23;CV;2/y;;cuisinier;0.024;déglacer;0.042;0.07;Le cuisinier déglace avec le;Le cuisinier déglace avec le jeu.;The cook deglazes with the juice.;10
+38;Word1;Context2;noeud;336;3130;23.22;CV;2/y;;artiste;-0.001;peindre;0.108;371;L’artiste peignait un;L’artiste peignait un noeud.;The artist was painting a nude.;10
+40;Word1;Context2;faux;-2;16616;103.81;CV;o/u;;traumatisme;0.029;délirer;0.056;127;Un traumatisme fait délirer les;Un traumatisme fait délirer les faux.;A trauma makes mad people mad.;10
+41;Word1;Context2;lot;304;10279;16.87;CV;o/u;;villageois;0.016;chasser;-0.011;0.31;Les villageois ont chassé le;Les villageois ont chassé le lot.;The villagers chased the wolf.;10
+43;Word1;Context2;peau;395;11281;116.26;CV;o/u;;infirmier;0.032;déceler;0.105;62;L’infirmier décèle les;L’infirmier décèle les peau.;The nurse detects the pulse.;10
+46;Word1;Context2;sceau;276;2964;17.74;CV;o/u;;enfant;0.056;dépenser;0.019;0.09;L’enfant dépense son;L’enfant dépense son sceau.;The child spends his penny.;10
+1;Word1;Context0;bac;269;10035;11.29;CVC;a/E;;sapin;0.057;ignorer;-0.002;0.029;Le sapin a ignoré le;Le sapin a ignoré le bac.;The fir ignored the tray / spout;10
+2;Word1;Context0;bâche;246;438;7.32;CVC;a/E;;flûte;0.053;caliner;0.079;0.023;La flûte a caliné la;La flûte a caliné la bâche.;The flute has cured the tarpaulin / spade;10
+6;Word1;Context0;balle;357;6722;60.84;CVC;a/E;;salade;0.051;raccourcir;0.075;0.074;La salade a raccourci la;La salade a raccourci la balle.;The salad has shortened the ball / beautiful;10
+10;Word1;Context0;datte;222;272;2.19;CVC;a/E;;panneau;0.038;dégringoler;0.054;0.014;Le panneau a dégringolé la;Le panneau a dégringolé la datte.;The panel tumbled the date / debt;10
+11;Word1;Context0;gare;258;9574;53.55;CVC;a/E;;lampe;0.055;trier;0.019;0.042;Les lampes ont trié la;Les lampes ont trié la gare.;Lamps sorted station / war;10
+12;Word1;Context0;mâche;69;218;1.58;CVC;a/E;;rivière;0.032;imprimer;0.043;0.051;La rivière a imprimé la;La rivière a imprimé la mâche.;The river has printed the mash;10
+13;Word1;Context0;mare;290;1814;7.68;CVC;a/E;;ananas;0.079;télécharger;0.036;0.031;Les ananas téléchargent près de leur;Les ananas téléchargent près de leur mare.;Pineapples download near their mother / pond;10
+15;Word1;Context0;masse;398;14822;123.33;CVC;a/E;;épingle;0.05;commander;0.052;0.043;L’épingle commandera la;L’épingle commandera la masse.;The pin will control mass / mass;10
+16;Word1;Context0;nage;257;1522;6.33;CVC;a/E;;couronne;0.069;écrire;0.03;-0.008;La couronne a écrit la;La couronne a écrit la nage.;Crown writes swimming / snow;10
+17;Word1;Context0;pagne;218;187;1.19;CVC;a/E;;message;0.079;exploser;-0.008;0.05;Les messages sont explosés avec un;Les messages sont explosés avec un pagne.;The messages are exploded with a loincloth / comb;10
+20;Word1;Context0;panne;283;4513;10.16;CVC;a/E;;chat;0.026;afficher;0.062;0.041;Le chat affiche la;Le chat affiche la panne.;The cat displays the breakdown / punishment;10
+21;Word1;Context0;salle;418;47286;145.49;CVC;a/E;;cadeau;0.043;argumenter;0.018;0.049;Le cadeau argumente la;Le cadeau argumente la salle.;The gift argues the room / saddle;10
+22;Word1;Context0;vanne;209;2814;6.97;CVC;a/E;;souris;0.038;livrer;0.068;0.057;La souris a livré la;La souris a livré la vanne.;The mouse has delivered the valve / vein;10
+23;Word1;Context0;bal;326;3401;17.2;CVC;a/O;;flèche;0.024;entendre;0.099;0.055;La flèche a entendu le;La flèche a entendu le bal.;The arrow has heard the ball / bowl;10
+24;Word1;Context0;bar;333;15317;36.29;CVC;a/O;;peluche;0.048;s'ordonner;0.032;0.044;Les peluches se sont ordonnées près du;Les peluches se sont ordonnées près du bar.;Soft toys are ordered near the bar / board;10
+27;Word1;Context0;cale;246;1284;8.71;CVC;a/O;;microphone;0.073;rencontrer;0.026;0.047;Le microphone a rencontré la;Le microphone a rencontré la cale.;The microphone met the wedge / glue;10
+28;Word1;Context0;date / datte;371;137621;73.23;CVC;a/O;;montre;0.055;éternuer;-0.006;0.065;La montre a éternué la;La montre a éternué la date / datte.;The watch sneezed the date / dot;10
+29;Word1;Context0;gamme;286;21153;15.38;CVC;a/O;;robe;0.093;attaquer;0.023;0.057;La robe a attaqué la nouvelle;La robe a attaqué la nouvelle gamme.;The dress has attacked the new range / eraser;10
+31;Word1;Context0;mare;290;1814;7.68;CVC;a/O;;brosse;0.037;pelleter;0.093;0.085;Les brosses ont pelleté la;Les brosses ont pelleté la mare.;Brushes shoveled the pond / death;10
+32;Word1;Context0;nasse;195;142;1.23;CVC;a/O;;carotte;0.016;courir;0.092;0.075;Les carottes ont été courues dans la;Les carottes ont été courues dans la nasse.;The carrots were run in the nasse / wedding;10
+33;Word1;Context0;natte;283;309;5.49;CVC;a/O;;fourche;0.091;stationner;0.053;0.07;La fourche stationnaient leurs;La fourche stationnaient leurs natte.;The fork stationed their mat / notes;10
+34;Word1;Context0;quart;377;9923;55.46;CVC;a/O;;sac;0.057;divulguer;0.03;0.041;Le sac divulgue le;Le sac divulgue le quart.;The bag divulges the quarter / body;10
+37;Word1;Context0;jeu;432;92111;248.23;CV;2/y;;croquette;0.076;peindre;0.065;0.068;Les croquettes peignent le;Les croquettes peignent le jeu.;Croquettes paint the game / juice;10
+38;Word1;Context0;noeud;336;3130;23.22;CV;2/y;;canapé;0.019;suspendre;0.093;0.042;Le canapé suspendait le;Le canapé suspendait le noeud.;The sofa suspended the knot / naked;10
+40;Word1;Context0;faux;-2;16616;103.81;CV;o/u;;colonne;0.082;sécher;0.061;0.062;La colonne sèche les;La colonne sèche les faux.;The ticket dries the fake / crazy;10
+41;Word1;Context0;lot;304;10279;16.87;CV;o/u;;clé;0.079;renverser;-0.004;0.052;Les clés ont renversé le;Les clés ont renversé le lot.;The keys reversed the lot / wolf;10
+43;Word1;Context0;peau;395;11281;116.26;CV;o/u;;feuille;0.086;équiper;0.054;0.031;La feuille équipe les;La feuille équipe les peau.;The leaf equips the skin / pulse;10
+46;Word1;Context0;sceau;276;2964;17.74;CV;o/u;;lierre;0.047;concentrer;0.067;0.04;Le lierre concentre le;Le lierre concentre le sceau.;Ivy concentrates the seal / penny;10
+1;Word2;Context1;bec;332;2446;19.26;CVC;a/E;;étudiant;-0.01;préparer;0.047;262;L'étudiant a préparé le;L'étudiant a préparé le bec.;The student has prepared the tray;10
+2;Word2;Context1;bêche;258;191;3.1;CVC;a/E;;polyéthylène;0.083;plastifier;0.092;422;Le polyéthylène a plastifié la;Le polyéthylène a plastifié la bêche.;The worker laminated the tarpaulin;10
+6;Word2;Context1;belle;-1;37038;212.81;CVC;a/E;;joueur;0.095;dévier;0.096;172;Le joueur a dévié la;Le joueur a dévié la belle.;The player deflected the ball;10
+10;Word2;Context1;dette;319;7156;13.13;CVC;a/E;;amande;0.014;fourrer;0.0001;467;L’amande fourre une;L’amande fourre une dette.;The chief pitted a date;10
+11;Word2;Context1;guerre;463;31230;342.35;CVC;a/E;;train;0.087;desservir;0.044;371;Le train dessert une;Le train dessert une guerre.;Workers electrified a station;10
+12;Word2;Context1;mêche;323;723;16.58;CVC;a/E;;cuisinier;0.024;assaisonner;0.085;92;Le cuisinier a assaisonné cette;Le cuisinier a assaisonné cette mêche.;The cook seasoned this lamb's lettuce;10
+13;Word2;Context1;mère;468;30957;499.81;CVC;a/E;;crapaud;0.122;coasser;0.111;494;Les crapauds coassent près de leur;Les crapauds coassent près de leur mère.;Toads croak near their pond;10
+15;Word2;Context1;messe;366;4092;21.64;CVC;a/E;;phisicien;-0.002;mesurer;0.004;161;Le physicien mesurera la;Le physicien mesurera la messe.;The physicist will measure the mass.;10
+16;Word2;Context1;neige;381;8972;52.42;CVC;a/E;;entraîneur;0.027;chronométrer;0.136;149;L'entraîneur a chronométré la;L'entraîneur a chronométré la neige.;The coach has timed the swim.;10
+17;Word2;Context1;peigne;278;658;8.29;CVC;a/E;;couturière;0.207;broder;0.135;474;Les couturières ont brodé le;Les couturières ont brodé le peigne.;The natives are draped with a loincloth;10
+20;Word2;Context1;peine;431;23635;265.71;CVC;a/E;;garagiste;0.078;Réparer;0.133;424;Le garagiste répare une;Le garagiste répare une peine.;The mechanic repairs a breakdown;10
+21;Word2;Context1;selle;290;1879;13.67;CVC;a/E;;double-vitrage;0.044;insonoriser;0.065;205;Le double-vitrage insonorise la;Le double-vitrage insonorise la selle.;The double-glazed windows soundproof the room;10
+22;Word2;Context1;veine;335;2079;21.87;CVC;a/E;;plombier;0.032;raccorder;0.083;117;Le plombier a raccordé la;Le plombier a raccordé la veine.;The plumber connected the valve.;10
+23;Word2;Context1;bol;290;2850;14.32;CVC;a/O;;musique;0.054;rythmer;0.084;0.3;La musique a rythmé le;La musique a rythmé le bol.;The music punctuated the ball.;10
+24;Word2;Context1;bord;414;22692;142.33;CVC;a/O;;cocktail;0.146;siroter;0.152;442;Les cocktails sont sirotés près du;Les cocktails sont sirotés près du bord.;Tourists have restored near the bar;10
+27;Word2;Context1;colle;254;3233;15.68;CVC;a/O;;pirate;0.053;éperonner;0.038;227;Les pirates ont éperonné la;Les pirates ont éperonné la colle.;The pirates spurred the hold.;10
+28;Word2;Context1;dot;290;972;3.33;CVC;a/O;;invitation;0.052;préciser;0.065;148;L’invitation a précisé la;L’invitation a précisé la dot.;The invitation specified the date.;10
+29;Word2;Context1;gomme;-2;1273;7.78;CVC;a/O;;marque;0.076;concevoir;0.07;232;La marque a conçu la nouvelle;La marque a conçu la nouvelle gomme.;The brand has designed a new range.;10
+31;Word2;Context1;mort;442;359;1.97;CVC;a/O;;verger;0.067;assécher;0.068;127;Les vergers ont asséché les;Les vergers ont asséché les mort.;The peasants have dried up the ponds.;10
+32;Word2;Context1;noce;330;1915;14.16;CVC;a/O;;troupe;0.088;acculer;0.049;263;Les troupes ont été acculées dans la;Les troupes ont été acculées dans la noce.;The troops were cornered in the trap.;10
+33;Word2;Context1;note;404;49102;80.71;CVC;a/O;;fille;0.064;enrubanner;0.067;169;Les filles enrubannaient leurs;Les filles enrubannaient leurs note.;The girls wrapped their mats.;10
+34;Word2;Context1;corps;473;34145;390.48;CVC;a/O;;équipe;0.068;disputer;0.09;325;L’équipe dispute le;L’équipe dispute le corps.;The team plays the quarter.;10
+37;Word2;Context1;jus;299;4267;14.65;CV;2/y;;enfant;0.056;amuser;0.068;234;Les enfants s’amusent avec le;Les enfants s’amusent avec le jus.;Children have fun with the game;10
+38;Word2;Context1;nu;-2;10346;118.2;CV;2/y;;marin;0.036;défaire;0.097;47;Le marin défaisait un;Le marin défaisait un nu.;The sailor undid a knot.;10
+40;Word2;Context1;fou;-2;14518;149.84;CV;o/u;;faussaire;0.059;multiplier;0.053;62;Les faussaires multiplient les;Les faussaires multiplient les fou.;Smugglers multiply fake.;10
+41;Word2;Context1;loup;358;6786;28.03;CV;o/u;;enchère;0.025;gagner;0.065;203;L’enchère a gagné le;L’enchère a gagné le loup.;The auctioneer sold the lot;10
+43;Word2;Context1;pouls;273;549;5.06;CV;o/u;;crème;0.035;hydrater;0.128;398;La crème hydrate les;La crème hydrate les pouls.;The cream moisturizes the skin.;10
+46;Word2;Context1;sou;361;155779;1028.9;CV;o/u;;notaire;0.105;apposer;0.023;164;Le notaire appose son;Le notaire appose son sou.;The notary affixes his seal.;10
+1;Word2;Context2;bec;332;2446;19.26;CVC;a/E;;luthier;0.167;évaser;0.273;0.13;Le luthier a évasé le;Le luthier a évasé le bec.;The luthier flared his beak;10
+2;Word2;Context2;bêche;258;191;3.1;CVC;a/E;;fermier;0.15;affûter;0.332;71;Le fermier a affûté la;Le fermier a affûté la bêche.;The farmer sharpened the spade;10
+6;Word2;Context2;belle;-1;37038;212.81;CVC;a/E;;prince;0.186;charmer;0.343;402;Le prince a charmé la;Le prince a charmé la belle.;The prince has charmed the beautiful;10
+10;Word2;Context2;dette;319;7156;13.13;CVC;a/E;;famille;0.109;rembourser;0.41;83;La famille rembourse une;La famille rembourse une dette.;The family has repaid a debt;10
+11;Word2;Context2;guerre;463;31230;342.35;CVC;a/E;;soldat;0.534;fomenter;0.332;252;Les soldats ont fomenté une;Les soldats ont fomenté une guerre.;The soldiers fomented a war.;10
+12;Word2;Context2;mêche;323;723;16.58;CVC;a/E;;coiffeur;0.394;défriser;0.295;375;Le coiffeur a défrisé cette;Le coiffeur a défrisé cette mêche.;The hairdresser has straightened this wick.;10
+13;Word2;Context2;mère;468;30957;499.81;CVC;a/E;;enfant;0.458;grandir;0.411;398;Les enfants grandissent près de leur;Les enfants grandissent près de leur mère.;Children grow up near their mother;10
+15;Word2;Context2;messe;366;4092;21.64;CVC;a/E;;prêtre;0.521;célébrer;0.642;452;Le prêtre célèbrera la;Le prêtre célèbrera la messe.;The priest will celebrate Mass.;10
+16;Word2;Context2;neige;381;8972;52.42;CVC;a/E;;montagnard;0.277;déblayer;0.462;102;Le montagnard a déblayé la;Le montagnard a déblayé la neige.;The mountaineer cleared the snow.;10
+17;Word2;Context2;peigne;278;658;8.29;CVC;a/E;;mêche;0.388;recoiffer;0.309;382;Les mèches sont recoiffées avec un;Les mèches sont recoiffées avec un peigne.;Clients are combed with a comb;10
+20;Word2;Context2;peine;431;23635;265.71;CVC;a/E;;criminel;0.409;encourir;0.507;215;Le criminel encourt une;Le criminel encourt une peine.;The criminal incurs a sentence;10
+21;Word2;Context2;selle;290;1879;13.67;CVC;a/E;;cavalier;0.478;enfourcher;0.376;331;Le cavalier enfourche la;Le cavalier enfourche la selle.;The rider rides the saddle;10
+22;Word2;Context2;veine;335;2079;21.87;CVC;a/E;;médicament;0.098;dilater;0.392;113;Le médicament a dilaté la;Le médicament a dilaté la veine.;The drug dilated the vein.;10
+23;Word2;Context2;bol;290;2850;14.32;CVC;a/O;;mixeur;0.546;casser;0.327;56;Le mixeur a cassé le;Le mixeur a cassé le bol.;The child broke the bowl.;10
+24;Word2;Context2;bord;414;22692;142.33;CVC;a/O;;marin;0.239;amarrer;0.371;263;Les marins se sont amarrés près du;Les marins se sont amarrés près du bord.;The sailors moored near the edge.;10
+27;Word2;Context2;colle;254;3233;15.68;CVC;a/O;;ébéniste;0.055;poncer;0.544;164;L'ébéniste a poncé la;L'ébéniste a poncé la colle.;The cabinetmaker has sanded the glue.;10
+28;Word2;Context2;dot;290;972;3.33;CVC;a/O;;mari;0.226;épouser;0.352;556;Le mari l’a épousée pour la;Le mari l’a épousée pour la dot.;The husband married her for the dowry.;10
+29;Word2;Context2;gomme;-2;1273;7.78;CVC;a/O;;additif;0.253;gélifier;0.295;297;L’additif a gélifié la nouvelle;L’additif a gélifié la nouvelle gomme.;Americans chew a new eraser.;10
+31;Word2;Context2;mort;442;359;1.97;CVC;a/O;;sorcière;0.136;ressusciter;0.455;112;Les sorcières ont ressuscité les;Les sorcières ont ressuscité les mort.;The witches raised the dead.;10
+32;Word2;Context2;noce;330;1915;14.16;CVC;a/O;;événement;0.14;célébrer;0.346;282;Deux événements ont été célébrés dans la;Deux événements ont été célébrés dans la noce.;Two events were celebrated in the wedding.;10
+33;Word2;Context2;note;404;49102;80.71;CVC;a/O;;secrétaire;0.085;rédiger;0.325;0.11;Les secrétaires rédigeaient leurs;Les secrétaires rédigeaient leurs note.;The secretaries wrote their notes.;10
+34;Word2;Context2;corps;473;34145;390.48;CVC;a/O;;eau froide;0.122;vivifer;0.305;114;L’eau froide vivifie le;L’eau froide vivifie le corps.;Cold water invigorates the body.;10
+37;Word2;Context2;jus;299;4267;14.65;CV;2/y;;cuisinier;0.076;déglacer;0.529;0.07;Le cuisinier déglace avec le;Le cuisinier déglace avec le jus.;The cook deglazes with the juice.;10
+38;Word2;Context2;nu;-2;10346;118.2;CV;2/y;;artiste;0.254;peindre;0.315;371;L’artiste peignait un;L’artiste peignait un nu.;The artist was painting a nude.;10
+40;Word2;Context2;fou;-2;14518;149.84;CV;o/u;;traumatisme;0.081;délirer;0.3;127;Un traumatisme fait délirer les;Un traumatisme fait délirer les fou.;A trauma makes mad people mad.;10
+41;Word2;Context2;loup;358;6786;28.03;CV;o/u;;villageois;0.329;chasser;0.357;0.31;Les villageois ont chassé le;Les villageois ont chassé le loup.;Villagers chased the wolf;10
+43;Word2;Context2;pouls;273;549;5.06;CV;o/u;;infirmier;0.116;déceler;0.225;62;L’infirmier décèle les;L’infirmier décèle les pouls.;;10
+46;Word2;Context2;sou;361;155779;1028.9;CV;o/u;;enfant;0.144;dépenser;0.302;0.09;L’enfant dépense son;L’enfant dépense son sou.;;10
+1;Word2;Context0;bec;332;2446;19.26;CVC;a/E;;sapin;0.075;ignorer;0.053;0.029;Le sapin a ignoré le;Le sapin a ignoré le bec.;;10
+2;Word2;Context0;bêche;258;191;3.1;CVC;a/E;;flûte;0.099;caliner;0.078;0.023;La flûte a caliné la;La flûte a caliné la bêche.;;10
+6;Word2;Context0;belle;-1;37038;212.81;CVC;a/E;;salade;0.088;raccourcir;0.052;0.074;La salade a raccourci la;La salade a raccourci la belle.;;10
+10;Word2;Context0;dette;319;7156;13.13;CVC;a/E;;panneau;-0.009;dégringoler;0.081;0.014;Le panneau a dégringolé la;Le panneau a dégringolé la dette.;;10
+11;Word2;Context0;guerre;463;31230;342.35;CVC;a/E;;lampe;0.032;trier;0.019;0.042;Les lampes ont trié la;Les lampes ont trié la guerre.;;10
+12;Word2;Context0;mêche;323;723;16.58;CVC;a/E;;rivière;0.022;imprimer;0.052;0.051;La rivière a imprimé la;La rivière a imprimé la mêche.;;10
+13;Word2;Context0;mère;468;30957;499.81;CVC;a/E;;ananas;0.045;télécharger;0.0006;0.031;Les ananas téléchargent près de leur;Les ananas téléchargent près de leur mère.;;10
+15;Word2;Context0;messe;366;4092;21.64;CVC;a/E;;épingle;0.037;commander;0.023;0.043;L’épingle commandera la;L’épingle commandera la messe.;;10
+16;Word2;Context0;neige;381;8972;52.42;CVC;a/E;;couronne;0.091;écrire;0.047;-0.008;La couronne a écrit la;La couronne a écrit la neige.;;10
+17;Word2;Context0;peigne;278;658;8.29;CVC;a/E;;message;0.032;exploser;0.01;0.05;Les messages sont explosés avec un;Les messages sont explosés avec un peigne.;;10
+20;Word2;Context0;peine;431;23635;265.71;CVC;a/E;;chat;0.041;afficher;0.034;0.041;Le chat affiche la;Le chat affiche la peine.;;10
+21;Word2;Context0;selle;290;1879;13.67;CVC;a/E;;cadeau;0.035;argumenter;0.026;0.049;Le cadeau argumente la;Le cadeau argumente la selle.;;10
+22;Word2;Context0;veine;335;2079;21.87;CVC;a/E;;souris;0.095;livrer;0.081;0.057;La souris a livré la;La souris a livré la veine.;;10
+23;Word2;Context0;bol;290;2850;14.32;CVC;a/O;;flèche;0.077;entendre;0.081;0.055;La flèche a entendu le;La flèche a entendu le bol.;;10
+24;Word2;Context0;bord;414;22692;142.33;CVC;a/O;;peluche;0.045;s'ordonner;0.08;0.044;Les peluches se sont ordonnées près du;Les peluches se sont ordonnées près du bord.;;10
+27;Word2;Context0;colle;254;3233;15.68;CVC;a/O;;microphone;0.064;rencontrer;0.006;0.047;Le microphone a rencontré la;Le microphone a rencontré la colle.;;10
+28;Word2;Context0;dot;290;972;3.33;CVC;a/O;;montre;0.04;éternuer;0.051;0.065;La montre a éternué la;La montre a éternué la dot.;;10
+29;Word2;Context0;gomme;-2;1273;7.78;CVC;a/O;;robe;0.077;attaquer;0.086;0.057;La robe a attaqué la nouvelle;La robe a attaqué la nouvelle gomme.;;10
+31;Word2;Context0;mort;442;359;1.97;CVC;a/O;;brosse;0.021;pelleter;0.085;0.085;Les brosses ont pelleté la;Les brosses ont pelleté la mort.;;10
+32;Word2;Context0;noce;330;1915;14.16;CVC;a/O;;carotte;0.019;courir;0.056;0.075;Les carottes ont été courues dans la;Les carottes ont été courues dans la noce.;;10
+33;Word2;Context0;note;404;49102;80.71;CVC;a/O;;fourche;0.004;stationner;0.018;0.07;La fourche stationnaient leurs;La fourche stationnaient leurs note.;;10
+34;Word2;Context0;corps;473;34145;390.48;CVC;a/O;;sac;0.074;divulguer;0.015;0.041;Le sac divulgue le;Le sac divulgue le corps.;;10
+37;Word2;Context0;jus;299;4267;14.65;CV;2/y;;croquette;0.098;peindre;0.073;0.068;Les croquettes peignent le;Les croquettes peignent le jus.;;10
+38;Word2;Context0;nu;-2;10346;118.2;CV;2/y;;canapé;0.049;suspendre;0.092;0.042;Le canapé suspendait le;Le canapé suspendait le nu.;;10
+40;Word2;Context0;fou;-2;14518;149.84;CV;o/u;;colonne;0.012;sécher;0.092;0.062;La colonne sèche les;La colonne sèche les fou.;;10
+41;Word2;Context0;loup;358;6786;28.03;CV;o/u;;clé;0.008;renverser;0.063;0.052;Les clés ont renversé le;Les clés ont renversé le loup.;;10
+43;Word2;Context0;pouls;273;549;5.06;CV;o/u;;feuille;0.048;équiper;0.047;0.031;La feuille équipe les;La feuille équipe les pouls.;;10
+46;Word2;Context0;sou;361;155779;1028.9;CV;o/u;;lierre;0.061;concentrer;0.052;0.04;Le lierre concentre le;Le lierre concentre le sou.;;10

@@ -9,3 +9,8 @@ Pour lancer le programme il faut copier la ligne de commande suivante :
 # Example: japanese text (vertical? horizontal?)
 ./displaylist.py --lang ar --id sujetN --rep 2 --isi 500 --stimdur 1200 --sampa 4 --col 3 --sep ";" listes/liste-mohamad.csv
 
+
+# Japanese notes
+
+font-hanazono
+fonts-horai-umefont

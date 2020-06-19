@@ -1,0 +1,4 @@
+num;seq
+1;aba
+2;ada
+3;aga
