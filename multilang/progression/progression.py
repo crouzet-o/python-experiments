@@ -130,23 +130,21 @@ if DEBUG:
 
 
 try:
-        import Caterpyllar as pyl
-        import sys
-        import string
-        import textwrap
-        import re
-        import random
         import math
         import os
-        import getopt
-        import pygame
+        import sys
+        import string
+        import re
+        import random
         import time
+        import Caterpyllar as pyl
+        import textwrap
+        import getopt
         import numpy as np
         import pyfribidi
         from pyfribidi import RTL,LTR,ON
-        # from socket import *
+        import pygame
         from pygame.locals import * # events, key names (MOUSEBUTTONDOWN,K_r...)
-        # from pygame.font import *
 except ImportError as err:
     print("couldn't load module. %s" % (err))
     SystemExit(2)
