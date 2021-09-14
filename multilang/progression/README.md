@@ -1,7 +1,29 @@
  
-Pour lancer le programme il faut copier la ligne de commande suivante :
+# Quelques exemples de lignes de commande pour lancer le programme :
 
+En arabe :
+./progression.py --lang ar --fontsize 40 --col 3 --sampa 4 --sylls 9 --id loc1 --rep 1 --timepersyll 100 --blocksize 5 --isi 1000 --progbar --trialpreread listes/liste-mohamad-rateinfo.csv 
+
+En chinois :
 ./progression.py --lang cjk --fontsize 40 --col 2 --sylls 1 --id loc1 --rep 1 --timepersyll 300 --blocksize 25 --isi 1000 2020-jue-master2-aff.csv
+
+# Signification des options :
+
+Lancer "./progression.py -h" pour avoir la liste des options disponibles
+
+--lang
+--fontsize
+--col
+--sampa
+--syls
+--id
+--trialpreread
+--
+
+
+
+
+# Notes sur l'expérience en chinois :
 
 Fichiers de contrôle (utiliser cet ordre de passation fixe) :
  

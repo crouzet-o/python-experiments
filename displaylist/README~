@@ -1,4 +1,0 @@
-Pour lancer le programme il faut copier la ligne de commande suivante :
-
-./displaylist.py --lang fr --id sujetN --rep 2 --isi 500 --stimdur 1200 --sampa 3 --col 10 --sep "," VtoV-expe1.csv 
-

@@ -1,19 +1,26 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
-# Added chinese font display argument
-# Added boolean toggle for progression bar
-# TODO: reintroduce RTL / pyfribidi controls for arabic
+# Added: chinese font display argument
+# Added: boolean toggle for progression bar
+# Added: toggle boolean progression bar display from command line arguments
+# Added: toggle boolean pre-reading / familiarisation reading from command line
+# arguments
+# Added: reintroduce RTL / pyfribidi controls for arabic (progression bar
+# direction: right-to-left)
+# TODO: Configure arabic messageing display through an external config file
+# TODO: Debug pause mode
+# TODO: 
 
 # Comment lancer le programme
 # ./progression.py --col 1 --sylls 2 --sampa --id essai --rep 5 --timepersyll 200 --blocksize 30 --isi 500 list-nasals-EVA.csv 
 
-VERSION = "0.0.7"
+VERSION = "0.0.8"
 DEBUG = False
 
 # These parameters should be controlled from the parsed arguments on
 # the command line or from a config file (cf. argparse vs. configargparse).
-PROGRESSION_DISPLAY = True
+#PROGRESSION_DISPLAY = True
 
 import wx
 tmp = wx.App(False)
@@ -64,11 +71,22 @@ parser.add_argument('--blocksize', dest='blocksize', nargs=1, default="20",
 parser.add_argument('--isi', dest='ISI', nargs=1, default=500,
                    help='Inter-Stimulus Interval (ISI) (in ms., default: isi = 500)')
 
-parser.add_argument('--famread', dest='famread', nargs=1, default='False',
-        help='Select whether we start with a reading familiarisation phase (default: read=\'False\', available = read=\'True\')')
+#parser.add_argument('--famread', dest='famread', nargs=1, default=False, action='store_true',
+#        help='Select whether we start with a reading familiarisation phase (default: read=\'False\', available = read=\'True\')')
+parser.add_argument('--famread', dest='famread', action='store_true', help='Boolean. Toggle familiarisation phase with linguistic materials (default: \'False\')')
+parser.add_argument('--no-famread', dest='famread', action='store_false', help='Boolean. Remove familiarisation phase with linguistic materials (default: \'False\')')
+parser.set_defaults(famread=False)
 
-parser.add_argument('--preread', dest='preread', nargs=1, default='False',
-        help='Select whether we start each trial with displaying the text (default: read=\'False\', available = read=\'True\')')
+#parser.add_argument('--preread', dest='preread', nargs=1, default=False, action='store_true',
+#        help='Select whether we start each trial with displaying the text (default: read=\'False\', available = read=\'True\')')
+parser.add_argument('--trialpreread', dest='preread', action='store_true', help='Boolean. Toggle short display of stimulus before each trial (default: \'False\')')
+parser.add_argument('--no-trialpreread', dest='preread', action='store_false', help='Boolean. Remove short display of stimulus before each trial (default: \'False\')')
+parser.set_defaults(preread=False)
+
+parser.add_argument('--progbar', dest='progbar', action='store_true', help='Boolean. Toggle progression bar display (default: \'True\')')
+parser.add_argument('--no-progbar', dest='progbar', action='store_false', help='Boolean. Remove progression bar display (default: \'True\')')
+parser.set_defaults(progbar=True)
+#        help='Select whether we display a progression bar (default: read=\'True\', available = read=\'False\')')
 
 parser.add_argument('filename', metavar='file', nargs=1,
                    help='The (CSV) file to be read.')
@@ -90,15 +108,17 @@ nbrep = int(args.nbrep[0])
 infile = args.filename[0]
 language = args.lang[0]
 subjectid = args.subject[0]
-FAMREAD = args.famread[0]
-PREREAD = args.preread[0]
+FAMREAD = args.famread
+PREREAD = args.preread
+PROGRESSION_DISPLAY = args.progbar
+
 
 #STIMDUR = int(args.STIMDUR)
 ITI = int(args.ISI[0])
 timepersyll = int(args.timepersyll[0])
 
 if DEBUG:
-        print(language, column,nbrep,infile,FAMREAD,PREREAD)
+        print(language, column,nbrep,infile,FAMREAD,PREREAD,PROGRESSION_DISPLAY)
 
     
 #from string import replace
@@ -121,8 +141,8 @@ try:
         import getopt
         import pygame
         import time
-        import pyfribidi
         import numpy as np
+        import pyfribidi
         from pyfribidi import RTL,LTR,ON
         # from socket import *
         from pygame.locals import * # events, key names (MOUSEBUTTONDOWN,K_r...)
@@ -279,13 +299,14 @@ myfontsize = 28
 
 def main():
         ## Phase d'initialisation
-        text = "Initialisation de l'affichage"
+        text = "Initializing display"
         #textsurface,textposition = display_text(text)
         nbsyll=9
         #pause(500)
         blank_bg(bgcolor)
         #pause(500)
         textsurface,textposition = display_text(text)
+        print(textposition)
         text_progressionbar_grow(textposition, nbsyll, timepersyll, darkblue) # (width, nb_syll)
         pause(2000)
         liste = pyl.read_data_2D(infile, ";", 1)
@@ -294,9 +315,10 @@ def main():
                 print(len(liste))
         
         # Phase de préparation lecture
-        if PREREAD == "True":
+        if FAMREAD == "True":
                 random.shuffle(liste)
-                splash_text("Vous allez commencer par vous familiariser avec les séquences que vous devrez lire.")
+#                splash_text("Vous allez commencer par vous familiariser avec les séquences que vous devrez lire.")
+                splash_text("حكى تَاب مرتين")
                 pause(ITI)
                 for i in range(len(liste)):
                         j="reading"
@@ -305,15 +327,17 @@ def main():
 
         # Phase de Training pour le débit
         random.shuffle(liste)
-        splash_text("Appuyez sur une touche pour commencer la phase d'entraînement")
+        #splash_text("Appuyez sur une touche pour commencer la phase d'entraînement")
+        splash_text("حكى تَاب مرتين")
         pause(ITI)
-        for i in range(10):
+        for i in range(min(10,len(liste))):
                 j="training"
                 catchpause()
                 runTheTrial(liste, i, j)
         
         # Phase de Test
-        splash_text("Appuyez sur une touche pour commencer l'expérience...")
+        #splash_text("Appuyez sur une touche pour commencer l'expérience...")
+        splash_text("حكى تَاب مرتين")
         pause(ITI)
         trial=0
         for j in range(0,nbrep):
@@ -334,7 +358,8 @@ def catchpause():
         for event in pygame.event.get():
                 if event.type == pygame.KEYDOWN: # or event.type == KEYUP: # QUIT event or keypressed or keydepressed
                         if event.key == pygame.K_ESCAPE or event.key == pygame.K_SPACE:
-                                display_text("Appuyez sur une touche pour reprendre l'enregistrement")
+                                #display_textexpe("Appuyez sur une touche pour reprendre l'enregistrement")
+                                display_text("حكى تَاب مرتين")
                                 while 1:
                                         for event in pygame.event.get():
                                                 if event.type == pygame.KEYDOWN: # or event.type == KEYUP: # QUIT event or keypressed or keydepressed
@@ -354,7 +379,8 @@ def catchpause():
 
 def blockpause():
         pygame.event.pump()
-        display_text("Appuyez sur une touche pour reprendre l'enregistrement")
+        #display_textexpe("Appuyez sur une touche pour reprendre l'enregistrement")
+        display_text("حكى تَاب مرتين")
         pyl.waitforkeypress()
         display_text("")
         pygame.time.wait(500)
@@ -412,7 +438,7 @@ def runTheTrial(liste, i, j):
         #pause(100)
         textsurface,textposition = display_textexpe(stimulus)
         if PROGRESSION_DISPLAY:
-                text_progressionbar_grow(textposition, nbsyll, timepersyll, darkblue) # (width, nb_syll,
+                text_progressionbar_grow(textposition, nbsyll, timepersyll, darkblue, textdirection) # (width, nb_syll,
                 #time_per_syll,bar_color)
         else:
                 pause(nbsyll * timepersyll)
@@ -492,11 +518,19 @@ def blank_bg(color):
 def pause(ms):
         pygame.time.delay(ms)
 
-def display_textexpe(text, bgcolor = bgcolor, dfont=pygame.font.Font(myexpefont, myexpefontsize)): # Display text
+def display_textexpe(string, bgcolor = bgcolor, dfont=pygame.font.Font(myexpefont, myexpefontsize)): # Display text
     font = dfont # Font name and size
-    text = font.render(text, 1, fgcolor) # Set text to display,
-                                                # antialiasing boolean
-                                                # and color
+
+    if textdirection=='RTL':
+        text = font.render(pyfribidi.log2vis(string), 1, fgcolor) # Set text to display, antialiasing and color
+        if DEBUG:
+            print(string,pyfribidi.log2vis(string))
+    else:
+        text = font.render(string, 1, fgcolor) # Set text to display, antialiasing and color
+        if DEBUG:
+            print(string)
+
+
     textpos = text.get_rect() # Get coordinates of the surface
                                 # needed for text display
     textsize = text.get_size()
@@ -513,11 +547,19 @@ def display_textexpe(text, bgcolor = bgcolor, dfont=pygame.font.Font(myexpefont,
     return(textsize,textpos)
 
 
-def display_text(text, dfont=pygame.font.Font(pygame.font.match_font('arial'), fontsize)): # Display text
+def display_text(string, bgcolor = bgcolor, dfont=pygame.font.Font(myexpefont, round(2/3*myexpefontsize))): # Display text
     font = dfont # Font name and size
-    text = font.render(text, 1, fgcolor) # Set text to display,
-                                                # antialiasing boolean
-                                                # and color
+    
+    if textdirection=='RTL':
+        text = font.render(pyfribidi.log2vis(string), 1, fgcolor) # Set text to display, antialiasing and color
+        if DEBUG:
+            print(string,pyfribidi.log2vis(string))
+    else:
+        text = font.render(string, 1, fgcolor) # Set text to display, antialiasing and color
+        if DEBUG:
+            print(string)
+
+
     textpos = text.get_rect() # Get coordinates of the surface
                                 # needed for text display
     textsize = text.get_size()
@@ -651,7 +693,7 @@ def vprogressionbar_grow(width,nb_syll,time_per_syll,bar_color): # Need to
 
 
 
-def text_progressionbar_grow(space, nb_syll, time_per_syll, bar_color): # Need to
+def text_progressionbar_grow(space, nb_syll, time_per_syll, bar_color, direction='LTR'): # Need to
     # compute time from beginning to end of window
     cwidth=0
     width = space[2] #int(0.02*window_size[0])
@@ -671,7 +713,10 @@ def text_progressionbar_grow(space, nb_syll, time_per_syll, bar_color): # Need t
         hbar = pygame.Surface((cwidth,height))
         hbar = hbar.convert()
         hbar.fill(bar_color)
-        window.blit(hbar, (xref,yref))
+        if direction=='LTR':
+            window.blit(hbar, (xref,yref))
+        else:
+            window.blit(hbar, (xref+space[2]-cwidth,yref))
         cwidth+=stepsize
         #               print(nb_syll,time_per_syll,window_size[1],stepsize)
         #               print((nb_syll*time_per_syll/nbsteps),"\n")

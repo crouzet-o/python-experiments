@@ -1,6 +1,8 @@
 # TODO:
 
-* Check whether there's a more recent version on the Dell laptop that was
+* Projets Spyder : comment réouvrir automatiquement les fichiers ouverts / sinon quel est l'intérêt d'un projet ?
+
+* Check whether there's a more recent version of `adaptive-2AFC.py` on the Dell laptop which was
 used during the NBC...
 
 
