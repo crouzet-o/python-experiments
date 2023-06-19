@@ -6,9 +6,6 @@ Created on Wed Mar 20 12:16:53 2019
 @author: OlivierCrouzet
 """
 
-# -*- coding: utf-8 -*-
-#
-
 import pygame
 
 black = 0, 0, 0

@@ -1,26 +1,29 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
-# Added: chinese font display argument
-# Added: boolean toggle for progression bar
-# Added: toggle boolean progression bar display from command line arguments
-# Added: toggle boolean pre-reading / familiarisation reading from command line
-# arguments
-# Added: reintroduce RTL / pyfribidi controls for arabic (progression bar
-# direction: right-to-left)
-# TODO: Configure arabic messageing display through an external config file
-# TODO: Debug pause mode
-# TODO: 
+# Added chinese font display argument
+# Added boolean toggle for progression bar
+# TODO: reintroduce RTL / pyfribidi controls for arabic
 
 # Comment lancer le programme
 # ./progression.py --col 1 --sylls 2 --sampa --id essai --rep 5 --timepersyll 200 --blocksize 30 --isi 500 list-nasals-EVA.csv 
 
-VERSION = "0.0.8"
+VERSION = "0.0.7"
 DEBUG = False
+
+## TODO
+'''
+- --infotext configuration / display
+- Better integration of the various display possibilities (familiarize with characters, pre-read the sentences, train, really run the experiment)
+- These would be associated with the following options: --familiarize TRUE , --pre-read TRUE, --train TRUE
+- Configure displayed texts in a -single- text file (json format?)
+
+'''
 
 # These parameters should be controlled from the parsed arguments on
 # the command line or from a config file (cf. argparse vs. configargparse).
-#PROGRESSION_DISPLAY = True
+#PREREAD = False
+PROGRESSION_DISPLAY = True
 
 import wx
 tmp = wx.App(False)
@@ -36,16 +39,15 @@ import argparse
 
 parser = argparse.ArgumentParser(description='Display text strings (words, sentences) for reading from a csv file. A progression bar aimed at manipulating the rate of speech production is displayed during reading.', epilog='Copyleft O. Crouzet (2013)')
 
-parser.add_argument('--col', dest='n', nargs=1, default="1", 
+## Definition of control file properties
+parser.add_argument('--colstim', dest='n', nargs=1, default="1", 
                     help='Select which column number of the file should be displayed (we start at 1, default: N=1 - first column)')
 
-parser.add_argument('--sampa', dest='sampa', nargs=1, default="2",
+parser.add_argument('--colsampa', dest='sampa', nargs=1, default="2",
         help='Select which column number of the file will be used for recording the SAMPA transcription (default: second column).')
 
-parser.add_argument('--sylls', dest='sylls', nargs=1,
+parser.add_argument('--colNsyll', dest='nSylls', nargs=1, default="3",
         help='Select which column number of the file contains the number of syllables used for controlling display rate (default: third column).')
-#parser.add_argument('--sylls', dest='sylls', nargs=1, default="3",
-#        help='Select which column number of the file contains the number of syllables used for controlling display rate (default: third column).')
 
 parser.add_argument('--fontsize', dest='fontsize', nargs=1, default="30",
                     help='Select font size for displaying stimuli (default: fontsize="30")')
@@ -54,9 +56,10 @@ parser.add_argument('--lang', dest='lang', nargs=1, default='fr',
         help='Select which language (font) we will use for displaying stimuli (default: lang=\'fr\', available = lang=\'ar\')')
 
 parser.add_argument('--id', dest='subject', nargs=1,
-                   help='Subject ID. Will create a file named "results-"ID".res". If the file exists, it will append data to it (no data will be erased).')
+                   help='Subject ID. Will create a file named "results-"ID".log". If the file exists, it will append data to it (no data will be erased).')
 
-parser.add_argument('--rep', dest='nbrep', nargs=1, default="1",
+## Definition of structural properties of the experiment
+parser.add_argument('--rep', dest='nbrep', nargs=1, default='1',
                    help='Select number of repetitions (default: nbrep = 1)')
 
 #parser.add_argument('--stimdur', dest='STIMDUR', nargs=1, default=2000,
@@ -71,35 +74,41 @@ parser.add_argument('--blocksize', dest='blocksize', nargs=1, default="20",
 parser.add_argument('--isi', dest='ISI', nargs=1, default=500,
                    help='Inter-Stimulus Interval (ISI) (in ms., default: isi = 500)')
 
-#parser.add_argument('--famread', dest='famread', nargs=1, default=False, action='store_true',
-#        help='Select whether we start with a reading familiarisation phase (default: read=\'False\', available = read=\'True\')')
-parser.add_argument('--famread', dest='famread', action='store_true', help='Boolean. Toggle familiarisation phase with linguistic materials (default: \'False\')')
-parser.add_argument('--no-famread', dest='famread', action='store_false', help='Boolean. Remove familiarisation phase with linguistic materials (default: \'False\')')
-parser.set_defaults(famread=False)
+## Definition of sub-tasks in the experiment
+parser.add_argument('--type', dest='expetype', default = 'raw', nargs=1,
+                   help='Experiment type. If simple, will remove pre-read phase, flash and progression bar. Fixed will remove the progression bar. Default to all properties (Familiarize with sentences + Pre-read + Training + Progression bar)')
 
-#parser.add_argument('--preread', dest='preread', nargs=1, default=False, action='store_true',
-#        help='Select whether we start each trial with displaying the text (default: read=\'False\', available = read=\'True\')')
-parser.add_argument('--trialpreread', dest='preread', action='store_true', help='Boolean. Toggle short display of stimulus before each trial (default: \'False\')')
-parser.add_argument('--no-trialpreread', dest='preread', action='store_false', help='Boolean. Remove short display of stimulus before each trial (default: \'False\')')
-parser.set_defaults(preread=False)
+parser.add_argument('--familiarize', dest='familiarize', nargs=1, default='False',
+        help='Select whether we start with a character familiarization phase (default: familiarize=\'False\', available = familiarize=\'True\')')
 
-parser.add_argument('--progbar', dest='progbar', action='store_true', help='Boolean. Toggle progression bar display (default: \'True\')')
-parser.add_argument('--no-progbar', dest='progbar', action='store_false', help='Boolean. Remove progression bar display (default: \'True\')')
-parser.set_defaults(progbar=True)
-#        help='Select whether we display a progression bar (default: read=\'True\', available = read=\'False\')')
+parser.add_argument('--preread', dest='preread', nargs=1, default='False',
+        help='Select whether the speakers will first be asked to read each sentence at one\'s one pace (default: preread=\'False\', available = preread=\'True\')')
+
+parser.add_argument('--training', dest='training', nargs=1, default='False',
+        help='Select whether a training phase will be launched before data collection (default: training=\'True\', available = training=\'False\')')
+
+## Definition of displayed portions of text
+parser.add_argument('--infotext', dest='infotext', nargs=1, default='Bienvenue. Appuyez sur une touche pour démarrer l\'expérience',
+                   help='Initial information text to be displayed at the beginning of an experiment in order to provide basic information.')
+
+parser.add_argument('--trainingtext', dest='trainingtext', nargs=1, default='Vous allez commencer par une phase d\'entraînement afin de vous familiariser avec la tâche. Appuyez sur la barre ESPACE pour commencer l\'entraînement...',
+                   help='Initial information text to be displayed at the beginning of an experiment in order to provide basic information.')
+
+parser.add_argument('--expetext', dest='expetext', nargs=1, default='L\'entraînement est terminé. Appuyez sur la barre ESPACE pour commencer l\'expérience...',
+                   help='Initial information text to be displayed at the beginning of an experiment in order to provide basic information.')
+
+
 
 parser.add_argument('filename', metavar='file', nargs=1,
                    help='The (CSV) file to be read.')
 
 args = parser.parse_args()
 if DEBUG:
-        print("Arguments = ",args.lang,args.n,args.lang,args.fontsize,args.nbrep,args.filename,args.ISI,args.timepersyll,args.sylls)
+        print("Arguments = ", args.lang, args.n, args.lang, args.fontsize, args.nbrep, args.filename, args.ISI, args.timepersyll, args.nSylls)
 
 column = int(args.n[0])-1
 sampacol = int(args.sampa[0])-1
-
-nbsylls = int(args.sylls[0])-1
-
+nbsylls = int(args.nSylls[0])-1
 blocksize = int(args.blocksize[0])
 fontsize = int(args.fontsize[0])
 
@@ -108,19 +117,68 @@ nbrep = int(args.nbrep[0])
 infile = args.filename[0]
 language = args.lang[0]
 subjectid = args.subject[0]
-FAMREAD = args.famread
-PREREAD = args.preread
-PROGRESSION_DISPLAY = args.progbar
-
+familiarize = args.familiarize[0]
+preread = args.preread[0]
+training = args.training[0]
+expetype = args.expetype[0]
+infotext = args.infotext[0]
 
 #STIMDUR = int(args.STIMDUR)
 ITI = int(args.ISI[0])
 timepersyll = int(args.timepersyll[0])
 
 if DEBUG:
-        print(language, column,nbrep,infile,FAMREAD,PREREAD,PROGRESSION_DISPLAY)
+        print(language, column,nbrep,infile,familiarize,preread)
 
-    
+# Global task-specification
+if expetype == "simple":
+    PREREAD=False
+    PROGRESSION_DISPLAY = False
+    ##timepersyll = 1500
+    FAMILIARIZE=True
+    TRAINING=True
+elif expetype == "fixed":
+    PREREAD=False
+    PROGRESSION_DISPLAY = False
+    ##timepersyll = 1500
+    FAMILIARIZE=True
+    TRAINING=True
+elif expetype == "full":
+    PREREAD=True
+    PROGRESSION_DISPLAY = True
+    ##timepersyll = 1500
+    FAMILIARIZE=True
+    TRAINING=True
+elif expetype == "karaoke":
+    PREREAD=False
+    PROGRESSION_DISPLAY=True
+    ##timepersyll = 1500
+    FAMILIARIZE=False
+    TRAINING=True
+else:
+    PREREAD=False
+    PROGRESSION_DISPLAY=True
+    ##timepersyll = 1500
+    FAMILIARIZE=False
+    TRAINING=True
+
+## Single-task specification
+if familiarize=="True":
+    FAMILIARIZE=True
+else:
+    FAMILIARIZE=False
+
+if preread=="True":
+    PREREAD=True
+else:
+    PREREAD=False
+
+if training=="True":
+    TRAINING=True
+else:
+    TRAINING=False
+
+
 #from string import replace
 #import pygame
 #import time
@@ -130,21 +188,23 @@ if DEBUG:
 
 
 try:
-        import math
-        import os
+        import Caterpyllar as pyl
         import sys
         import string
+        import textwrap
         import re
         import random
-        import time
-        import Caterpyllar as pyl
-        import textwrap
+        import math
+        import os
         import getopt
-        import numpy as np
-        import pyfribidi
-        from pyfribidi import RTL,LTR,ON
         import pygame
+        import time
+        import pyfribidi
+        import numpy as np
+        from pyfribidi import RTL,LTR,ON
+        # from socket import *
         from pygame.locals import * # events, key names (MOUSEBUTTONDOWN,K_r...)
+        # from pygame.font import *
 except ImportError as err:
     print("couldn't load module. %s" % (err))
     SystemExit(2)
@@ -152,7 +212,7 @@ except ImportError as err:
 
 pyl.sayhi()
 
-resultsfile = 'resultats-'+subjectid+'.res'
+resultsfile = 'resultats-'+subjectid+'.log'
 print("Results file = ",resultsfile,"\n")
 resdata = pyl.init_resultsfile(resultsfile)
 
@@ -168,6 +228,7 @@ lightblue = (105, 160, 170)
 darkblue = (78, 120, 127)
 bgcolor = lightblue
 fgcolor = white # black
+flash = (255, 100, 100)
 
 # Pre-initialisation of the Sound Mixer (need to be loaded before
 # other initialisations)
@@ -240,22 +301,20 @@ pygame.time.delay(ITI) # pygame.time.delay takes time values in
 # Setup fonts for display
 
 # Default parameters
-myexpefont = pygame.font.match_font('freeserif,times,freesans,arial')
-myexpefontsize = 38
-textdirection='LTR'
+#myexpefont = pygame.font.match_font('freeserif,times,freesans,arial')
+#myexpefontsize = 38
+#textdirection='LTR'
 
 if language == 'ar':
         #myexpefont = pygame.font.match_font('arab,kacstbook,scheherazade,alarabiya,kacst')
         myexpefont = pygame.font.match_font('timesnewroman,arial,tholoth,scheherazade,tholoth,kacstqurn')
         myexpefontsize = 88
         textdirection='RTL'
-
-if language == 'jp':
+elif language == 'jp':
         myexpefont = pygame.font.match_font('ipaexmincho,japan')
         myexpefontsize = 48
         textdirection='LTR'
-
-if language == 'cjk':
+elif language == 'cjk':
         myexpefont = pygame.font.match_font('\
         arplumingcn, \
         arpluminghk, \
@@ -287,55 +346,86 @@ if language == 'cjk':
         myexpefont = 'fonts/uming.ttc'
         myexpefontsize = 48
         textdirection='LTR'
+else: # General case (e.g. french, english, dutch...)
+    myexpefont = pygame.font.match_font('freesans,arial,freeserif,times')
+    myexpefontsize = 38
+    textdirection='LTR'
 
 #unicode = pygame.font.Font(unicode, 48)
-print(myexpefont)
+if DEBUG:
+    print(myexpefont)
 
-myfont = pygame.font.match_font('freesans,arial')
+myfont = pygame.font.match_font('freeserif, times, freesans, arial')
 myfontsize = 28
 
 
 def main():
         ## Phase d'initialisation
-        text = "Initializing display"
+        text = "Initialisation de l'affichage"
         #textsurface,textposition = display_text(text)
-        nbsyll=9
+        nbsyll=1
         #pause(500)
         blank_bg(bgcolor)
         #pause(500)
         textsurface,textposition = display_text(text)
-        print(textposition)
         text_progressionbar_grow(textposition, nbsyll, timepersyll, darkblue) # (width, nb_syll)
-        pause(2000)
+        pause(100)
         liste = pyl.read_data_2D(infile, ";", 1)
-
+        if len(infotext)>0:
+            splash_text(infotext)
+        
         if DEBUG:
                 print(len(liste))
         
         # Phase de préparation lecture
-        if FAMREAD == "True":
-                random.shuffle(liste)
-#                splash_text("Vous allez commencer par vous familiariser avec les séquences que vous devrez lire.")
-                splash_text("حكى تَاب مرتين")
-                pause(ITI)
+        if FAMILIARIZE:
+            random.shuffle(liste)
+            if language == "cjk":
+                splash_text("Familiarisation avec les caractères. Vérifiez que vous connaissez les séquences affichées. Appuyez sur une touche après chaque lecture.")
+            else:
+                splash_text("Familiarisation avec les stimuli. Lisez les stimuli affichés. Appuyez sur une touche pour passer à la séquence suivante.")
+            pause(ITI)
+            if expetype == "simple":
                 for i in range(len(liste)):
-                        j="reading"
-                        readingphase(liste,i,j)
-
+                    j="reading"
+                    readingphase(liste,i,j)
+            else:
+                for i in range(10):
+                    j="reading"
+                    readingphase(liste,i,j)
 
         # Phase de Training pour le débit
-        random.shuffle(liste)
-        #splash_text("Appuyez sur une touche pour commencer la phase d'entraînement")
-        splash_text("حكى تَاب مرتين")
-        pause(ITI)
-        for i in range(min(10,len(liste))):
+        if TRAINING:
+            random.shuffle(liste)
+            if expetype == "simple":
+#                splash_text("Phase d'entraînement : Les stimuli vont se succéder à l'écran et vous devez lire ce qui apparaît en suivant le rythme de lecture déterminé par l'ordinateur. Vous n'avez plus besoin d'appuyer sur une touche pour faire se succéder les stimuli.")
+                splash_text("Début de la phase d'entraînement. Vous devez lire les phrases qui apparaissent à l'écran. Appuyez sur la barre ESPACE pour commencer.")
+            else:
+#                splash_text("Phase d'entraînement : Les stimuli vont se succéder à l'écran en 2 phases. Un flash rouge vous indique que vous devez commencer à lire. Avant ce flash, la séquence à lire apparaît à l'écran. Vous pouvez la lire silencieusement. Dès l'apparition du flash rouge, vous devez commencer à lire à voix haute assez rapidement en suivant le rythme déterminé par l'ordinateur. Vous n'avez plus besoin d'appuyer sur une touche pour faire se succéder les stimuli.")
+                splash_text("Début de la phase d'entraînement. Vous devez lire les phrases qui apparaissent à l'écran. Appuyez sur la barre ESPACE pour commencer.")
+                
+            #if language == "cjk":
+            #    splash_text("请按任意键开始。")
+            #else:
+            #    splash_text("Appuyez sur la barre ESPACE pour commencer l'expérience.")
+            pause(ITI)
+            for i in range(10):
                 j="training"
                 catchpause()
                 runTheTrial(liste, i, j)
         
-        # Phase de Test
-        #splash_text("Appuyez sur une touche pour commencer l'expérience...")
-        splash_text("حكى تَاب مرتين")
+        # Phase Expérimentale Réelle
+        if expetype == "simple":
+            splash_text('L\'expérience va commencer. Appuyez sur la barre ESPACE pour commencer.') 
+           ##splash_text("Début de l'expérience : Les stimuli vont se succéder à l'écran et vous devez lire ce qui apparaît en suivant le rythme de lecture déterminé par l'ordinateur.")
+        else:
+            splash_text('L\'expérience va commencer. Appuyez sur la barre ESPACE pour commencer.')
+            ##splash_text("Début de l'expérience : Un flash rouge vous indique que vous devez commencer à lire. Avant ce flash, la séquence à lire apparaît à l'écran. Vous pouvez la lire silencieusement. Dès l'apparition du flash rouge, vous devez commencer à lire à voix haute assez rapidement en suivant le rythme déterminé par l'ordinateur.")
+
+        #if language == "cjk":
+        #    splash_text("请按任意键开始。")
+        #else:
+        #    splash_text("Appuyez sur une touche pour commencer l'expérience...")
         pause(ITI)
         trial=0
         for j in range(0,nbrep):
@@ -349,6 +439,8 @@ def main():
                                 trial = 0
                                 blockpause()
                         runTheTrial(liste, i, j)
+        pause(1000)
+        splash_text("Cette phase de l\'expérience est terminée.")
 
 
 def catchpause():
@@ -356,29 +448,38 @@ def catchpause():
         for event in pygame.event.get():
                 if event.type == pygame.KEYDOWN: # or event.type == KEYUP: # QUIT event or keypressed or keydepressed
                         if event.key == pygame.K_ESCAPE or event.key == pygame.K_SPACE:
-                                #display_textexpe("Appuyez sur une touche pour reprendre l'enregistrement")
-                                display_text("حكى تَاب مرتين")
-                                while 1:
-                                        for event in pygame.event.get():
-                                                if event.type == pygame.KEYDOWN: # or event.type == KEYUP: # QUIT event or keypressed or keydepressed
-                                                        if event.key == pygame.K_q:
-                                                                pyl.quitthegame()
-                                                        else:
-                                                                display_text("")
-                                                                return                                                  
-                                display_text("")
-                                pygame.time.wait(500)
-                                pygame.event.clear()
-                                return
-                        return
+                            if language == "cjk":
+                                splash_text("请按任意键开始。")
+                            elif language == "ar":
+                                splash_text(" (ARABIC) Appuyez sur la barre ESPACE pour reprendre l'enregistrement...")
+                            else:
+                                splash_text("Appuyez sur la barre ESPACE pour reprendre l'enregistrement ou sur ESC pour quitter...")
+                            while True:
+                                for followEvent in pygame.event.get():
+                                    if followEvent.type == pygame.KEYDOWN: # or event.type == KEYUP: # QUIT event or keypressed or keydepressed
+                                        if followEvent.key == pygame.K_q:
+                                            pyl.quitthegame()
+                                        else:
+                                            #display_text("A")
+                                            return                                                  
+                                        #display_text("B")
+                                    pygame.time.wait(500)
+                                    pygame.event.clear()
+                                    #display_text("C")
+                                    return
+                                #display_text("D")
+                             #return
+                        #return
         pygame.event.clear()
 
 
 
 def blockpause():
         pygame.event.pump()
-        #display_textexpe("Appuyez sur une touche pour reprendre l'enregistrement")
-        display_text("حكى تَاب مرتين")
+        if language == "cjk":
+            display_textexpe("请按任意键开始。")
+        else:
+            display_text("Appuyez sur la barre ESPACE pour reprendre l'enregistrement")
         pyl.waitforkeypress()
         display_text("")
         pygame.time.wait(500)
@@ -423,12 +524,13 @@ def runTheTrial(liste, i, j):
         #blank_bg(bgcolor)
         #pause(ITI)
         if PREREAD:
-                textsurface,textposition = display_textexpe(stimulus)
-                pause(2 * nbsyll * timepersyll)
-                blank_bg(red)
-                textsurface,textposition = display_textexpe(stimulus, bgcolor=red)
-                pause(ITI)
-                blank_bg(bgcolor)
+            flashDuration = ITI/4
+            textsurface,textposition = display_textexpe(stimulus)
+            pause(2 * nbsyll * timepersyll)
+            blank_bg(flash)
+            textsurface,textposition = display_textexpe(stimulus, bgcolor=flash)
+            pause(flashDuration)
+            blank_bg(bgcolor)
         #print(textsurface,textposition,"\n") # bar = vprogressionbar_init(15,10,grey) #
         #(width,init_height,bar_color)
         #vprogressionbar_grow(35,length,timepersyll,red) # (width, nb_syll,
@@ -436,7 +538,7 @@ def runTheTrial(liste, i, j):
         #pause(100)
         textsurface,textposition = display_textexpe(stimulus)
         if PROGRESSION_DISPLAY:
-                text_progressionbar_grow(textposition, nbsyll, timepersyll, darkblue, textdirection) # (width, nb_syll,
+                text_progressionbar_grow(textposition, nbsyll, timepersyll, darkblue) # (width, nb_syll,
                 #time_per_syll,bar_color)
         else:
                 pause(nbsyll * timepersyll)
@@ -503,7 +605,7 @@ def readingphase(liste, i, j):
 
 def splash_text(text):
     blank_bg(bgcolor)
-    display_text(text)
+    display_textexpe(text)
     pyl.waitforkeypress()
     blank_bg(bgcolor)
 
@@ -514,50 +616,55 @@ def blank_bg(color):
     pygame.display.flip()
 
 def pause(ms):
-        pygame.time.delay(ms)
+        pygame.time.delay(int(ms))
 
-def display_textexpe(string, bgcolor = bgcolor, dfont=pygame.font.Font(myexpefont, myexpefontsize)): # Display text
+def display_textexpe(text, bgcolor = bgcolor, dfont=pygame.font.Font(myexpefont, myexpefontsize)): # Display text
+    alterPos = 0
+    lineSpacing=int(fontsize+fontsize/6)
     font = dfont # Font name and size
-
-    if textdirection=='RTL':
-        text = font.render(pyfribidi.log2vis(string), 1, fgcolor) # Set text to display, antialiasing and color
-        if DEBUG:
-            print(string,pyfribidi.log2vis(string))
-    else:
-        text = font.render(string, 1, fgcolor) # Set text to display, antialiasing and color
-        if DEBUG:
-            print(string)
-
-
-    textpos = text.get_rect() # Get coordinates of the surface
+    stext = font.render(text, 1, fgcolor) # Set text to display,
+                                                # antialiasing boolean
+                                                # and color
+    textpos = stext.get_rect() # Get coordinates of the surface
                                 # needed for text display
-    textsize = text.get_size()
-    textpos.centerx = background.get_rect().centerx # set text
-                                                        # x-position
-                                                        # centered
-    textpos.centery = background.get_rect().centery # set text
-                                                        # y-position
-                                                        # centered
+    textsize = stext.get_size()
     background.fill(bgcolor) # Blank the background surface
     window.blit(background, (0,0)) # Blit it
-    window.blit(text, textpos) # Blits the text to the coordinates
+    if textsize[0] > .8*window_size[0]:
+        yShift = int(window_size[1]/3)
+        wtext = textwrap.wrap(text, width = 40)
+        if DEBUG:
+            print(textsize[0], window_size[0])
+        for i, string in enumerate(wtext):
+            stext = font.render(string, 1, fgcolor)
+            textpos = stext.get_rect()
+            textpos.centerx = background.get_rect().centerx # set text
+                                                        # x-position
+                                                        # centered
+            textpos.centery = background.get_rect().centery + alterPos - yShift # set text
+                                                        # y-position
+                                                        # centered
+            alterPos += lineSpacing
+            
+            window.blit(stext, textpos) # Blits the text to the coordinates
+    else:
+        textpos.centerx = background.get_rect().centerx # set text
+                                                        # x-position
+                                                        # centered
+        textpos.centery = background.get_rect().centery + alterPos # set text
+                                                        # y-position
+                                                        # centered
+            
+        window.blit(stext, textpos) # Blits the text to the coordinates
     pygame.display.flip() # Flip the display
     return(textsize,textpos)
 
 
-def display_text(string, bgcolor = bgcolor, dfont=pygame.font.Font(myexpefont, round(2/3*myexpefontsize))): # Display text
+def display_text(text, dfont=pygame.font.Font(pygame.font.match_font('arial'), fontsize)): # Display text
     font = dfont # Font name and size
-    
-    if textdirection=='RTL':
-        text = font.render(pyfribidi.log2vis(string), 1, fgcolor) # Set text to display, antialiasing and color
-        if DEBUG:
-            print(string,pyfribidi.log2vis(string))
-    else:
-        text = font.render(string, 1, fgcolor) # Set text to display, antialiasing and color
-        if DEBUG:
-            print(string)
-
-
+    text = font.render(text, 1, fgcolor) # Set text to display,
+                                                # antialiasing boolean
+                                                # and color
     textpos = text.get_rect() # Get coordinates of the surface
                                 # needed for text display
     textsize = text.get_size()
@@ -691,13 +798,13 @@ def vprogressionbar_grow(width,nb_syll,time_per_syll,bar_color): # Need to
 
 
 
-def text_progressionbar_grow(space, nb_syll, time_per_syll, bar_color, direction='LTR'): # Need to
+def text_progressionbar_grow(space, nb_syll, time_per_syll, bar_color): # Need to
     # compute time from beginning to end of window
-    cwidth=0
-    width = space[2] #int(0.02*window_size[0])
-    height= space[3] #initial vertical height
-    xref = space[0]
-    yref = space[1]+height
+    cwidth=int(0)
+    width = int(space[2]) #int(0.02*window_size[0])
+    height= int(space[3]) #initial vertical height
+    xref = int(space[0])
+    yref = int(space[1]+height)
     if DEBUG:
         print(xref, yref, width, height)
     
@@ -711,11 +818,8 @@ def text_progressionbar_grow(space, nb_syll, time_per_syll, bar_color, direction
         hbar = pygame.Surface((cwidth,height))
         hbar = hbar.convert()
         hbar.fill(bar_color)
-        if direction=='LTR':
-            window.blit(hbar, (xref,yref))
-        else:
-            window.blit(hbar, (xref+space[2]-cwidth,yref))
-        cwidth+=stepsize
+        window.blit(hbar, (xref,yref))
+        cwidth+=int(stepsize)
         #               print(nb_syll,time_per_syll,window_size[1],stepsize)
         #               print((nb_syll*time_per_syll/nbsteps),"\n")
         if DEBUG:

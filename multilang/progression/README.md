@@ -1,4 +1,27 @@
- 
+# Débits utilisés dans l'expérience VV / débit
+
+* 70 (ms / syll)
+* 140 (ms / syll)
+* 190 (ms / syll)
+
+# Corrections / Améliorations du script
+
+* Amélioration des noms de paramètres
+
+# Exemple de ligne de commande
+
+## En français
+
+`./progression.py --lang fr --fontsize 40 --colstim 2 --colNsyll 7 --id test0 --rep 1 --timepersyll 140 --blocksize 5 --isi 1000 listeVV.csv`
+
+# Installation
+
+* Recent versions of wxPython have been reconceived from scratch. Installing it from conda (conda install -c conda-forge wxpython) or with a simple pip command (pip install wxpython) does not work (ipython won't find the module)
+* `pip install -U -f https://extras.wxpython.org/wxPython4/extras/linux/gtk3/debian-11 wxPython`
+* (see https://www.wxpython.org/pages/downloads/)
+
+
+
 # Quelques exemples de lignes de commande pour lancer le programme :
 
 En arabe :

@@ -1,0 +1,4 @@
+./progression.py --fontsize 40 --colstim 2 --colNsyll 7 --id loc1 --rep 6 --blocksize 40 --isi 500 --familiarize "False", --preread "False" --training "True" --infotext "" --timepersyll 70 listeVV.csv
+./progression.py --fontsize 40 --colstim 2 --colNsyll 7 --id loc1 --rep 6 --blocksize 40 --isi 500 --familiarize "False", --preread "False" --training "True" --trainingtext "Cette fois-ci vous allez pouvoir aller un peu moins vite. Commencez l'entraînement en appuyant sur ESPACE." --infotext "" --timepersyll 140 listeVV.csv
+./progression.py --fontsize 40 --colstim 2 --colNsyll 7 --id loc1 --rep 6 --blocksize 40 --isi 500 --familiarize "False", --preread "False" --training "True" --infotext "" --trainingtext "Maintenant vous allez aller beaucoup moins vite. Commencez l'entraîntement en appuyant sur ESPACE." --timepersyll 190 listeVV.csv
+

@@ -60,7 +60,7 @@ parser.add_argument('filename', metavar='file', nargs=1,
 
 args = parser.parse_args()
 if debug==1:
-	print "Arguments = ",args.lang,args.n,args.lang,args.fontsize,args.nbrep,args.filename,args.ISI,args.timepersyll,args.sylls
+	print("Arguments = ",args.lang,args.n,args.lang,args.fontsize,args.nbrep,args.filename,args.ISI,args.timepersyll,args.sylls)
 
 column = int(args.n[0])-1
 sampacol = int(args.sampa[0])-1
@@ -80,7 +80,7 @@ ITI = int(args.ISI[0])
 timepersyll = int(args.timepersyll[0])
 
 if debug==1:
-	print language,column,nbrep,infile,read
+	print(language,column,nbrep,infile,read)
 
     
 #from string import replace
@@ -112,14 +112,14 @@ try:
 
 
 except ImportError, err:
-    print "couldn't load module. %s" % (err)
+    print("couldn't load module. %s" % (err))
     SystemExit(2)
 
 
 pyl.sayhi()
 
 resultsfile = 'resultats-'+subjectid+'.res'
-print "Results file = ",resultsfile,"\n"
+print("Results file = ",resultsfile,"\n")
 resdata = pyl.init_resultsfile(resultsfile)
 
 
@@ -210,7 +210,7 @@ def main():
     liste = pyl.read_data_2D(infile,";",1)
 
     if debug==1:
-        print len(liste)
+        print(len(liste))
     
     # Phase de préparation lecture
     if read == "True":
@@ -238,7 +238,7 @@ def main():
     for j in range(0,nbrep):
         random.shuffle(liste)
         if debug==1:
-            print "j = ",j
+            print("j = ",j)
         for i in range(0,len(liste)):
             catchpause()
             trial+=1
@@ -282,12 +282,12 @@ def blockpause():
 
 def runtheexperiment(liste,i,j):
     if debug==1:
-        print "i, nbsylls, column = ",i,nbsylls,column
+        print("i, nbsylls, column = ",i,nbsylls,column)
     stimulus = liste[i][column]
     #nbsylls = int(liste[i][1])
     nbsyll = int(liste[i][nbsylls])
     if debug==1:
-        print "stimulus = ",stimulus,"\n"
+        print("stimulus = ",stimulus,"\n")
     #textsurf = display_text(stimulus)
     blank_bg(white)
     #vblinkbar(35,window_size[1],1,500,blue) # (width, height,
@@ -299,7 +299,7 @@ def runtheexperiment(liste,i,j):
     #pause(ITI)
     textsurface,textposition = display_text(stimulus)
     #pause(ITI)
-    #print textsurface,textposition,"\n" # bar = vprogressionbar_init(15,10,grey) #
+    #print(textsurface,textposition,"\n" # bar = vprogressionbar_init(15,10,grey)) #
                             #(width,init_height,bar_color)
     #vprogressionbar_grow(35,length,timepersyll,red) # (width, nb_syll,
                                                #time_per_syll,bar_color)
@@ -307,7 +307,7 @@ def runtheexperiment(liste,i,j):
     text_progressionbar_grow(textposition,nbsyll,timepersyll,blue) # (width, nb_syll,
                                                #time_per_syll,bar_color)
     savedata = liste[i][column]+";"+liste[i][nbsylls]+";"+liste[i][0]+";"+liste[i][1]+";"+liste[i][2]+";"+liste[i][3]+";"+str(i)+";"+str(j)+";"+str(timepersyll)+"\n"
-    print savedata
+    print(savedata)
     resdata.write(savedata)
     #pause(100)
     #blank_bg(white)
@@ -326,12 +326,12 @@ def runtheexperiment(liste,i,j):
 
 def readingphase(liste,i,j):
     if debug==1:
-        print "i, nbsylls, column = ",i,nbsylls,column
+        print("i, nbsylls, column = ",i,nbsylls,column)
     stimulus = liste[i][column]
     #nbsylls = int(liste[i][1])
     nbsyll = int(liste[i][nbsylls])
     if debug==1:
-        print "stimulus = ",stimulus,"\n"
+        print("stimulus = ",stimulus,"\n")
     #textsurf = display_text(stimulus)
     blank_bg(white)
     #vblinkbar(35,window_size[1],1,500,blue) # (width, height,
@@ -343,7 +343,7 @@ def readingphase(liste,i,j):
     pause(ITI)
     #textsurface,textposition = display_text(stimulus)
     #pause(ITI)
-    #print textsurface,textposition,"\n" # bar = vprogressionbar_init(15,10,grey) #
+    #print(textsurface,textposition,"\n" # bar = vprogressionbar_init(15,10,grey)) #
                             #(width,init_height,bar_color)
     #vprogressionbar_grow(35,length,timepersyll,red) # (width, nb_syll,
                                                #time_per_syll,bar_color)
@@ -351,7 +351,7 @@ def readingphase(liste,i,j):
     #text_progressionbar_grow(textposition,nbsyll,timepersyll,blue) # (width, nb_syll,
                                                #time_per_syll,bar_color)
     #savedata = liste[i][column]+";"+liste[i][nbsylls]+";"+liste[i][0]+";"+liste[i][1]+";"+liste[i][2]+";"+liste[i][3]+";"+str(i)+";"+str(j)+";"+str(timepersyll)+"\n"
-    #print savedata
+    #print(savedata)
     #resdata.write(savedata)
     #pause(100)
     #blank_bg(white)
@@ -504,8 +504,8 @@ def vprogressionbar_grow(width,nb_syll,time_per_syll,bar_color): # Need to
 		window.blit(bar_r, (window_size[0]-width,window_size[1]-height))
 
 		height+=stepsize
-#		print nb_syll,time_per_syll,window_size[1],stepsize
-#		print (nb_syll*time_per_syll/nbsteps),"\n"
+#		print(nb_syll,time_per_syll,window_size[1],stepsize)
+#		print((nb_syll*time_per_syll/nbsteps),"\n")
 		pause(nb_syll*time_per_syll/nbsteps)
 #		pause(5)
 		pygame.display.flip()
@@ -527,24 +527,24 @@ def text_progressionbar_grow(space,nb_syll,time_per_syll,bar_color): # Need to
     xref = space[0]
     yref = space[1]+height
     if debug==1:
-        print xref, yref, width, height
+        print(xref, yref, width, height)
 
     pygame.display.flip()
     #pause(1000)
     nbsteps = 40 #100
     stepsize = width/nbsteps #
     if debug==1:
-        print stepsize
+        print(stepsize)
     while cwidth <= width:
         hbar = pygame.Surface((cwidth,height))
         hbar = hbar.convert()
         hbar.fill(bar_color)
         window.blit(hbar, (xref,yref))
         cwidth+=stepsize
-        #		print nb_syll,time_per_syll,window_size[1],stepsize
-        #		print (nb_syll*time_per_syll/nbsteps),"\n"
+        #		print(nb_syll,time_per_syll,window_size[1],stepsize)
+        #		print((nb_syll*time_per_syll/nbsteps),"\n")
         if debug==1:
-                print nb_syll,time_per_syll,nbsteps
+                print(nb_syll,time_per_syll,nbsteps)
         pause(nb_syll*time_per_syll/nbsteps)
         #		pause(5)
         pygame.display.flip()

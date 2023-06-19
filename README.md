@@ -34,7 +34,7 @@ Included programs:
   some usefull installation commands):
 
 sudo apt-get install libgtk2.0-dev python3-pip
-(sudo) pip3 install pygame wxPython
+(sudo) pip3 install pygame wxPython pyfribidi
 
 
 ## displaylist.py

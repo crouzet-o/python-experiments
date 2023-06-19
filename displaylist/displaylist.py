@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/home/crouzet-o/anaconda3/envs/expe/bin/python3
 # -*- coding: utf-8 -*-
 #
 #
@@ -55,7 +55,7 @@ parser.add_argument('filename', metavar='file', nargs=1,
 
 args = parser.parse_args()
 if debug==1:
-	print args.lang,args.n,args.nbrep,args.filename
+	print(args.lang,args.n,args.nbrep,args.filename)
 
 subjectid = args.subject[0]
 column = int(args.n[0])-1
@@ -69,7 +69,7 @@ STIMDUR = int(args.STIMDUR[0])
 ITI = int(args.ISI[0])
 
 if debug==1:
-	print language,column,nbrep,infile
+	print(language,column,nbrep,infile)
 
 try:
 	import Caterpyllar as pyl
