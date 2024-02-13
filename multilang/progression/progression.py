@@ -9,14 +9,16 @@
 # ./progression.py --col 1 --sylls 2 --sampa --id essai --rep 5 --timepersyll 200 --blocksize 30 --isi 500 list-nasals-EVA.csv 
 
 VERSION = "0.0.7"
+#DEBUG = True
 DEBUG = False
 
 ## TODO
 '''
-- --infotext configuration / display
-- Better integration of the various display possibilities (familiarize with characters, pre-read the sentences, train, really run the experiment)
-- These would be associated with the following options: --familiarize TRUE , --pre-read TRUE, --train TRUE
-- Configure displayed texts in a -single- text file (json format?)
+* Using an XML control file:
+    - --infotext configuration / display
+    - Better integration of the various display possibilities (familiarize with characters, pre-read the sentences, train, really run the experiment)
+    ??? - These would be associated with the following options: --familiarize TRUE , --pre-read TRUE, --train TRUE
+* Configure displayed texts in a -single- text file (json format?)
 
 '''
 
@@ -362,7 +364,7 @@ if DEBUG:
     print(myexpefont)
 
 myfont = pygame.font.match_font('freeserif, times, freesans, arial')
-myfontsize = 48
+#myfontsize = 48
 
 
 def main():
@@ -389,7 +391,7 @@ def main():
             if language == "ar":
                 splash_text("(ARABIC) Familiarisation avec les caractères. Vérifiez que vous connaissez les séquences affichées. Appuyez sur une touche après chaque lecture.")
             elif language == "cjk":
-                splash_text("Familiarisation avec les caractères. Vérifiez que vous connaissez les séquences affichées. Appuyez sur une touche après chaque lecture.")
+                splash_text("(CJK) Familiarisation avec les caractères. Vérifiez que vous connaissez les séquences affichées. Appuyez sur une touche après chaque lecture.")
             else:
                 splash_text("Familiarisation avec les stimuli. Lisez les stimuli affichés. Appuyez sur une touche pour passer à la séquence suivante.")
             pause(ITI)
@@ -407,9 +409,9 @@ def main():
             #if expetype == "simple":
             # splash_text("Phase d'entraînement : Les stimuli vont se succéder à l'écran et vous devez lire ce qui apparaît en suivant le rythme de lecture déterminé par l'ordinateur. Vous n'avez plus besoin d'appuyer sur une touche pour faire se succéder les stimuli.")
             if language == "ar":
-                splash_text("(ARABIC) Début de la phase d'entraînement. Vous devez lire les phrases qui apparaissent à l'écran. Appuyez sur la barre ESPACE pour commencer.")
+                splash_text("بداية مرحلة التمرين. إقرأ الجمل التالية ومن ثم إضغط على مفتاح المسافة للبدء بالتسجيل.") #(ARABIC) Début de la phase d'entraînement. Vous devez lire les phrases qui apparaissent à l'écran. Appuyez sur la barre ESPACE pour commencer.
             elif language == "cjk":
-                splash_text("Début de la phase d'entraînement. Vous devez lire les phrases qui apparaissent à l'écran. Appuyez sur la barre ESPACE pour commencer.")
+                splash_text("(CJK) Début de la phase d'entraînement. Vous devez lire les phrases qui apparaissent à l'écran. Appuyez sur la barre ESPACE pour commencer.")
             else:
                 splash_text("Début de la phase d'entraînement. Vous devez lire les phrases qui apparaissent à l'écran. Appuyez sur la barre ESPACE pour commencer.")
         #else:
@@ -428,8 +430,8 @@ def main():
                 trainingSize = round(min(len(liste), trainingSize))
             repeatTraining=True
             while repeatTraining==True:
-                blank_bg(bgcolor)
                 pause(ITI)
+                blank_bg(bgcolor)
                 random.shuffle(liste)
                 for i in range(trainingSize):
                     j="training"
@@ -437,9 +439,10 @@ def main():
                     runTheTrial(liste, i, j)
                     #pause(ITI)
                 if language == "ar":
-                    wait_text("(ARABIC) Si vous souhaitez refaire un entraînement, appuyez sur la touche ENTREE.")
+                    wait_text("إذا أردت إعادة مرحلة التمرين إضغط على مفتاح الإدخال.") #(ARABIC) Si vous souhaitez refaire un entraînement, appuyez sur la touche ENTREE.
+                    #wait_text("(ARABIC) Si vous souhaitez refaire un entraînement, appuyez sur la touche ENTREE.")
                 elif language == "cjk":
-                    wait_text("Cette phase de l\'expérience est terminée.")
+                    wait_text("(CJK) Cette phase de l\'expérience est terminée.")
                 else:
                     wait_text("Si vous souhaitez refaire un entraînement, appuyez sur la touche ENTREE.")
                 repeatTraining = catchRepeatTrainingBool()
@@ -448,9 +451,10 @@ def main():
 
         # Phase Expérimentale Réelle
         if language == "ar":
-            splash_text('(ARABIC) L\'expérience va commencer. Appuyez sur la barre ESPACE pour commencer.') 
+            splash_text('التجربة على وشك البدء. إضغط مفتاح المسافة للبدء.') # (ARABIC) L\'expérience va commencer. Appuyez sur la barre ESPACE pour commencer.
+            #splash_text('(ARABIC) L\'expérience va commencer. Appuyez sur la barre ESPACE pour commencer.') 
         elif language == "cjk":
-            splash_text('L\'expérience va commencer. Appuyez sur la barre ESPACE pour commencer.') 
+            splash_text('(CJK) L\'expérience va commencer. Appuyez sur la barre ESPACE pour commencer.') 
         else:
             splash_text('L\'expérience va commencer. Appuyez sur la barre ESPACE pour commencer.') 
             ##splash_text("Début de l'expérience : Les stimuli vont se succéder à l'écran et vous devez lire ce qui apparaît en suivant le rythme de lecture déterminé par l'ordinateur.")
@@ -474,9 +478,10 @@ def main():
                         runTheTrial(liste, i, j)
         pause(1000)
         if language == "ar":
-            splash_text("(ARABIC) Cette phase de l\'expérience est terminée. Merci de votre contribution.")
+            splash_text("هذه التجربة قد إنتهت. شكرا جزيلا للمشاركة.") #(ARABIC) Cette phase de l\'expérience est terminée. Merci de votre contribution.
+            #splash_text("(ARABIC) Cette phase de l\'expérience est terminée. Merci de votre contribution.")
         elif language == "cjk":
-            splash_text("Cette phase de l\'expérience est terminée. Merci de votre contribution.")
+            splash_text("(CJK) Cette phase de l\'expérience est terminée. Merci de votre contribution.")
         else:
             splash_text("Cette phase de l\'expérience est terminée. Merci de votre contribution.")
 
@@ -490,7 +495,7 @@ def catchpause():
                 if language == "ar":
                     splash_text("(ARABIC) Appuyez sur la barre ESPACE pour reprendre l'enregistrement...")
                 elif language == "cjk":
-                    splash_text("请按任意键开始。")
+                    splash_text("请按任意键开始")
                 else:
                     splash_text("Appuyez sur la barre ESPACE pour reprendre l'enregistrement ou sur ESC pour quitter...")
                 while True:
@@ -500,16 +505,12 @@ def catchpause():
                                 pyl.quitthegame()
                             else:
                                 #display_text("A")
+                                pygame.time.wait(500)
                                 return                                                  
                 #display_text("B")
-    pygame.time.wait(500)
     pygame.event.clear()
     #display_text("C")
     return
-    #display_text("D")
-    #return
-    #return
-    pygame.event.clear()
 
     
 def catchRepeatTrainingBool():
@@ -524,7 +525,7 @@ def catchRepeatTrainingBool():
     while grab:
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN: # or event.type == KEYUP: # QUIT event or keypressed or keydepressed
-                if event.key == pygame.K_RETURN:
+                if event.key == pygame.K_RETURN | event.key == pygame.K_KP_ENTER:
                     repeatTraining = True
                 else:
                     repeatTraining = False
@@ -741,7 +742,7 @@ def display_textexpe(text, bgcolor = bgcolor, dfont=pygame.font.Font(myexpefont,
 
 
 #def display_text(text, dfont=pygame.font.Font(pygame.font.match_font('arial'), fontsize)): # Display text
-def display_text(text, dfont=pygame.font.Font(myfont, myfontsize)): # Display text
+def display_text(text, dfont=pygame.font.Font(myfont, fontsize)): # Display text
     if DEBUG:
         print(text)
     alterPos = 0
@@ -759,15 +760,27 @@ def display_text(text, dfont=pygame.font.Font(myfont, myfontsize)): # Display te
                                                 # and color
     textpos = stext.get_rect() # Get coordinates of the surface needed for text display
     textsize = stext.get_size()
-    background.fill(bgcolor) # Blank the background surface
-    window.blit(background, (0,0)) # Blit it
-    if textsize[0] > .8*window_size[0]:
+    #background.fill(bgcolor) # Blank the background surface
+    #window.blit(background, (0,0)) # Blit it
+    if textsize[0] > .5*window_size[0]:
+        print(textsize[0], window_size[0])
         yShift = int(window_size[1]/3)
         wtext = textwrap.wrap(text, width = 70)
         if DEBUG:
+            print(wtext)
             print(textsize[0], window_size[0])
         for i, string in enumerate(wtext):
-            stext = font.render(string, 1, fgcolor)
+            if textdirection=='RTL':
+                stext = font.render(pyfribidi.log2vis(string), 1, fgcolor) # Set text to display,
+                                                # antialiasing boolean
+                                                # and color
+                if DEBUG:
+                    print(string, pyfribidi.log2vis(string))
+            else:
+                stext = font.render(string, 1, fgcolor) # Set text to display,
+                                                # antialiasing boolean
+                                                # and color
+            #stext = font.render(string, 1, fgcolor)
             textpos = stext.get_rect()
             textpos.centerx = background.get_rect().centerx # set text
                                                         # x-position
@@ -779,14 +792,26 @@ def display_text(text, dfont=pygame.font.Font(myfont, myfontsize)): # Display te
             
             window.blit(stext, textpos) # Blits the text to the coordinates
     else:
+        if textdirection=='RTL':
+            stext = font.render(pyfribidi.log2vis(text), 1, fgcolor) # Set text to display,
+                                                # antialiasing boolean
+                                                # and color
+            if DEBUG:
+                print(text, pyfribidi.log2vis(text))
+        else:
+            stext = font.render(text, 1, fgcolor) # Set text to display,
+                                                # antialiasing boolean
+                                                # and color
+        textpos = stext.get_rect() # Get coordinates of the surface needed for text display
+        #textsize = stext.get_size()
         textpos.centerx = background.get_rect().centerx # set text
                                                         # x-position
                                                         # centered
         textpos.centery = background.get_rect().centery + alterPos # set text
                                                         # y-position
                                                         # centered
-            
-    window.blit(stext, textpos) # Blits the text to the coordinates
+        window.blit(stext, textpos) # Blits the text to the coordinates
+
     pygame.display.flip() # Flip the display
     return(textsize,textpos)
 
