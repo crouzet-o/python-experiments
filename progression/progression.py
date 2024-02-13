@@ -519,8 +519,12 @@ def vprogressionbar_grow(width,nb_syll,time_per_syll,bar_color): # Need to
 
 
 
-def text_progressionbar_grow(space,nb_syll,time_per_syll,bar_color): # Need to
+def text_progressionbar_grow(space,nb_syll,time_per_syll,bar_color,direction): # Need to
     # compute time from beginning to end of window
+    #
+    # TODO: set default value for direction in order to keep compatibility with
+    # previous versions not implementing direction.
+    #
     cwidth=0
     width = space[2] #int(0.02*window_size[0])
     height= space[3] #initial vertical height

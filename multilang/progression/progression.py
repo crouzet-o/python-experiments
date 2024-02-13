@@ -3,7 +3,7 @@
 
 # Added chinese font display argument
 # Added boolean toggle for progression bar
-# TODO: reintroduce RTL / pyfribidi controls for arabic
+# TODO: 
 
 # Comment lancer le programme
 # ./progression.py --col 1 --sylls 2 --sampa --id essai --rep 5 --timepersyll 200 --blocksize 30 --isi 500 list-nasals-EVA.csv 
@@ -88,7 +88,7 @@ parser.add_argument('--training', dest='training', nargs=1, default='False',
         help='Select whether a training phase will be launched before data collection (default: training=\'True\', available = training=\'False\')')
 
 ## Definition of displayed portions of text
-parser.add_argument('--infotext', dest='infotext', nargs=1, default='Bienvenue. Appuyez sur une touche pour démarrer l\'expérience',
+parser.add_argument('--infotext', dest='infotext', nargs=1, default='',
                    help='Initial information text to be displayed at the beginning of an experiment in order to provide basic information.')
 
 parser.add_argument('--trainingtext', dest='trainingtext', nargs=1, default='Vous allez commencer par une phase d\'entraînement afin de vous familiariser avec la tâche. Appuyez sur la barre ESPACE pour commencer l\'entraînement...',
@@ -121,7 +121,11 @@ familiarize = args.familiarize[0]
 preread = args.preread[0]
 training = args.training[0]
 expetype = args.expetype[0]
-infotext = args.infotext[0]
+#infotext = args.infotext[0]
+if len(args.infotext)>0:
+    infotext = args.infotext[0]
+else:
+    infotext = []
 
 #STIMDUR = int(args.STIMDUR)
 ITI = int(args.ISI[0])
@@ -356,7 +360,7 @@ if DEBUG:
     print(myexpefont)
 
 myfont = pygame.font.match_font('freeserif, times, freesans, arial')
-myfontsize = 28
+myfontsize = 48
 
 
 def main():
@@ -380,7 +384,9 @@ def main():
         # Phase de préparation lecture
         if FAMILIARIZE:
             random.shuffle(liste)
-            if language == "cjk":
+            if language == "ar":
+                splash_text("(ARABIC) Familiarisation avec les caractères. Vérifiez que vous connaissez les séquences affichées. Appuyez sur une touche après chaque lecture.")
+            elif language == "cjk":
                 splash_text("Familiarisation avec les caractères. Vérifiez que vous connaissez les séquences affichées. Appuyez sur une touche après chaque lecture.")
             else:
                 splash_text("Familiarisation avec les stimuli. Lisez les stimuli affichés. Appuyez sur une touche pour passer à la séquence suivante.")
@@ -396,31 +402,49 @@ def main():
 
         # Phase de Training pour le débit
         if TRAINING:
-            random.shuffle(liste)
-            if expetype == "simple":
-#                splash_text("Phase d'entraînement : Les stimuli vont se succéder à l'écran et vous devez lire ce qui apparaît en suivant le rythme de lecture déterminé par l'ordinateur. Vous n'avez plus besoin d'appuyer sur une touche pour faire se succéder les stimuli.")
+            #if expetype == "simple":
+            # splash_text("Phase d'entraînement : Les stimuli vont se succéder à l'écran et vous devez lire ce qui apparaît en suivant le rythme de lecture déterminé par l'ordinateur. Vous n'avez plus besoin d'appuyer sur une touche pour faire se succéder les stimuli.")
+            if language == "ar":
+                splash_text("(ARABIC) Début de la phase d'entraînement. Vous devez lire les phrases qui apparaissent à l'écran. Appuyez sur la barre ESPACE pour commencer.")
+            elif language == "cjk":
                 splash_text("Début de la phase d'entraînement. Vous devez lire les phrases qui apparaissent à l'écran. Appuyez sur la barre ESPACE pour commencer.")
             else:
-#                splash_text("Phase d'entraînement : Les stimuli vont se succéder à l'écran en 2 phases. Un flash rouge vous indique que vous devez commencer à lire. Avant ce flash, la séquence à lire apparaît à l'écran. Vous pouvez la lire silencieusement. Dès l'apparition du flash rouge, vous devez commencer à lire à voix haute assez rapidement en suivant le rythme déterminé par l'ordinateur. Vous n'avez plus besoin d'appuyer sur une touche pour faire se succéder les stimuli.")
                 splash_text("Début de la phase d'entraînement. Vous devez lire les phrases qui apparaissent à l'écran. Appuyez sur la barre ESPACE pour commencer.")
-                
+        #else:
+        # splash_text("Phase d'entraînement : Les stimuli vont se succéder à l'écran en 2 phases. Un flash rouge vous indique que vous devez commencer à lire. Avant ce flash, la séquence à lire apparaît à l'écran. Vous pouvez la lire silencieusement. Dès l'apparition du flash rouge, vous devez commencer à lire à voix haute assez rapidement en suivant le rythme déterminé par l'ordinateur. Vous n'avez plus besoin d'appuyer sur une touche pour faire se succéder les stimuli.")
+        #    splash_text("Début de la phase d'entraînement. Vous devez lire les phrases qui apparaissent à l'écran. Appuyez sur la barre ESPACE pour commencer.")
+            
             #if language == "cjk":
             #    splash_text("请按任意键开始。")
             #else:
             #    splash_text("Appuyez sur la barre ESPACE pour commencer l'expérience.")
             pause(ITI)
-            for i in range(10):
-                j="training"
-                catchpause()
-                runTheTrial(liste, i, j)
-        
+            repeatTraining=True
+            while repeatTraining==True:
+                random.shuffle(liste)
+                for i in range(round(min(len(liste)/5, 10))):
+                    j="training"
+                    #catchpause()
+                    runTheTrial(liste, i, j)
+                    #pause(ITI)
+                if language == "ar":
+                    wait_text("(ARABIC) Si vous souhaitez refaire un entraînement, appuyez sur la touche ENTREE.")
+                elif language == "cjk":
+                    wait_text("Cette phase de l\'expérience est terminée.")
+                else:
+                    wait_text("Si vous souhaitez refaire un entraînement, appuyez sur la touche ENTREE.")
+                repeatTraining = catchRepeatTrainingBool()
+
+
+
         # Phase Expérimentale Réelle
-        if expetype == "simple":
+        if language == "ar":
+            splash_text('(ARABIC) L\'expérience va commencer. Appuyez sur la barre ESPACE pour commencer.') 
+        elif language == "cjk":
             splash_text('L\'expérience va commencer. Appuyez sur la barre ESPACE pour commencer.') 
-           ##splash_text("Début de l'expérience : Les stimuli vont se succéder à l'écran et vous devez lire ce qui apparaît en suivant le rythme de lecture déterminé par l'ordinateur.")
         else:
-            splash_text('L\'expérience va commencer. Appuyez sur la barre ESPACE pour commencer.')
-            ##splash_text("Début de l'expérience : Un flash rouge vous indique que vous devez commencer à lire. Avant ce flash, la séquence à lire apparaît à l'écran. Vous pouvez la lire silencieusement. Dès l'apparition du flash rouge, vous devez commencer à lire à voix haute assez rapidement en suivant le rythme déterminé par l'ordinateur.")
+            splash_text('L\'expérience va commencer. Appuyez sur la barre ESPACE pour commencer.') 
+            ##splash_text("Début de l'expérience : Les stimuli vont se succéder à l'écran et vous devez lire ce qui apparaît en suivant le rythme de lecture déterminé par l'ordinateur.")
 
         #if language == "cjk":
         #    splash_text("请按任意键开始。")
@@ -440,37 +464,64 @@ def main():
                                 blockpause()
                         runTheTrial(liste, i, j)
         pause(1000)
-        splash_text("Cette phase de l\'expérience est terminée.")
+        if language == "ar":
+            splash_text("(ARABIC) Cette phase de l\'expérience est terminée. Merci de votre contribution.")
+        elif language == "cjk":
+            splash_text("Cette phase de l\'expérience est terminée. Merci de votre contribution.")
+        else:
+            splash_text("Cette phase de l\'expérience est terminée. Merci de votre contribution.")
 
 
 def catchpause():
-        pygame.event.pump()
-        for event in pygame.event.get():
-                if event.type == pygame.KEYDOWN: # or event.type == KEYUP: # QUIT event or keypressed or keydepressed
-                        if event.key == pygame.K_ESCAPE or event.key == pygame.K_SPACE:
-                            if language == "cjk":
-                                splash_text("请按任意键开始。")
-                            elif language == "ar":
-                                splash_text(" (ARABIC) Appuyez sur la barre ESPACE pour reprendre l'enregistrement...")
+# TODO: DEBUG this function
+    pygame.event.pump()
+    for event in pygame.event.get():
+        if event.type == pygame.KEYDOWN: # or event.type == KEYUP: # QUIT event or keypressed or keydepressed
+            if event.key == pygame.K_ESCAPE or event.key == pygame.K_SPACE:
+                if language == "ar":
+                    splash_text("(ARABIC) Appuyez sur la barre ESPACE pour reprendre l'enregistrement...")
+                elif language == "ar":
+                    splash_text("请按任意键开始。")
+                else:
+                    splash_text("Appuyez sur la barre ESPACE pour reprendre l'enregistrement ou sur ESC pour quitter...")
+                while True:
+                    for followEvent in pygame.event.get():
+                        if followEvent.type == pygame.KEYDOWN: # or event.type == KEYUP: # QUIT event or keypressed or keydepressed
+                            if followEvent.key == pygame.K_q:
+                                pyl.quitthegame()
                             else:
-                                splash_text("Appuyez sur la barre ESPACE pour reprendre l'enregistrement ou sur ESC pour quitter...")
-                            while True:
-                                for followEvent in pygame.event.get():
-                                    if followEvent.type == pygame.KEYDOWN: # or event.type == KEYUP: # QUIT event or keypressed or keydepressed
-                                        if followEvent.key == pygame.K_q:
-                                            pyl.quitthegame()
-                                        else:
-                                            #display_text("A")
-                                            return                                                  
-                                        #display_text("B")
-                                    pygame.time.wait(500)
-                                    pygame.event.clear()
-                                    #display_text("C")
-                                    return
-                                #display_text("D")
-                             #return
-                        #return
-        pygame.event.clear()
+                                #display_text("A")
+                                return                                                  
+                #display_text("B")
+    pygame.time.wait(500)
+    pygame.event.clear()
+    #display_text("C")
+    return
+    #display_text("D")
+    #return
+    #return
+    pygame.event.clear()
+
+    
+def catchRepeatTrainingBool():
+    # Wait for key press and returns True if the user has typed the ENTER
+    # key. Returns False for any other key typed.
+    #
+    pygame.event.pump()
+    # Defaults to returning False / not repeating training session
+    repeatTraining = False
+    # Set Boolean that will let the loop end
+    grab = True
+    while grab:
+        for event in pygame.event.get():
+            if event.type == pygame.KEYDOWN: # or event.type == KEYUP: # QUIT event or keypressed or keydepressed
+                if event.key == pygame.K_RETURN:
+                    repeatTraining = True
+                else:
+                    repeatTraining = False
+                grab = False
+    pygame.event.clear()
+    return repeatTraining
 
 
 
@@ -537,6 +588,8 @@ def runTheTrial(liste, i, j):
         #time_per_syll,bar_color)
         #pause(100)
         textsurface,textposition = display_textexpe(stimulus)
+        if DEBUG:
+            print(textsurface, textposition, stimulus)
         if PROGRESSION_DISPLAY:
                 text_progressionbar_grow(textposition, nbsyll, timepersyll, darkblue) # (width, nb_syll,
                 #time_per_syll,bar_color)
@@ -605,9 +658,14 @@ def readingphase(liste, i, j):
 
 def splash_text(text):
     blank_bg(bgcolor)
-    display_textexpe(text)
+    display_text(text)
     pyl.waitforkeypress()
     blank_bg(bgcolor)
+
+
+def wait_text(text):
+    blank_bg(bgcolor)
+    display_text(text)
 
 
 def blank_bg(color):
@@ -618,11 +676,19 @@ def blank_bg(color):
 def pause(ms):
         pygame.time.delay(int(ms))
 
+
 def display_textexpe(text, bgcolor = bgcolor, dfont=pygame.font.Font(myexpefont, myexpefontsize)): # Display text
     alterPos = 0
     lineSpacing=int(fontsize+fontsize/6)
     font = dfont # Font name and size
-    stext = font.render(text, 1, fgcolor) # Set text to display,
+    if textdirection=='RTL':
+        stext = font.render(pyfribidi.log2vis(text), 1, fgcolor) # Set text to display,
+                                                # antialiasing boolean
+                                                # and color
+        if DEBUG:
+            print(text, pyfribidi.log2vis(text))
+    else:
+        stext = font.render(text, 1, fgcolor) # Set text to display,
                                                 # antialiasing boolean
                                                 # and color
     textpos = stext.get_rect() # Get coordinates of the surface
@@ -660,23 +726,54 @@ def display_textexpe(text, bgcolor = bgcolor, dfont=pygame.font.Font(myexpefont,
     return(textsize,textpos)
 
 
-def display_text(text, dfont=pygame.font.Font(pygame.font.match_font('arial'), fontsize)): # Display text
+
+#def display_text(text, dfont=pygame.font.Font(pygame.font.match_font('arial'), fontsize)): # Display text
+def display_text(text, dfont=pygame.font.Font(myfont, myfontsize)): # Display text
+    if DEBUG:
+        print(text)
+    alterPos = 0
+    lineSpacing=int(fontsize+fontsize/6)
     font = dfont # Font name and size
-    text = font.render(text, 1, fgcolor) # Set text to display,
+    if textdirection=='RTL':
+        stext = font.render(pyfribidi.log2vis(text), 1, fgcolor) # Set text to display,
                                                 # antialiasing boolean
                                                 # and color
-    textpos = text.get_rect() # Get coordinates of the surface
-                                # needed for text display
-    textsize = text.get_size()
-    textpos.centerx = background.get_rect().centerx # set text
-                                                        # x-position
-                                                        # centered
-    textpos.centery = background.get_rect().centery # set text
-                                                        # y-position
-                                                        # centered
+        if DEBUG:
+            print(text, pyfribidi.log2vis(text))
+    else:
+        stext = font.render(text, 1, fgcolor) # Set text to display,
+                                                # antialiasing boolean
+                                                # and color
+    textpos = stext.get_rect() # Get coordinates of the surface needed for text display
+    textsize = stext.get_size()
     background.fill(bgcolor) # Blank the background surface
     window.blit(background, (0,0)) # Blit it
-    window.blit(text, textpos) # Blits the text to the coordinates
+    if textsize[0] > .8*window_size[0]:
+        yShift = int(window_size[1]/3)
+        wtext = textwrap.wrap(text, width = 70)
+        if DEBUG:
+            print(textsize[0], window_size[0])
+        for i, string in enumerate(wtext):
+            stext = font.render(string, 1, fgcolor)
+            textpos = stext.get_rect()
+            textpos.centerx = background.get_rect().centerx # set text
+                                                        # x-position
+                                                        # centered
+            textpos.centery = background.get_rect().centery + alterPos - yShift # set text
+                                                        # y-position
+                                                        # centered
+            alterPos += lineSpacing
+            
+            window.blit(stext, textpos) # Blits the text to the coordinates
+    else:
+        textpos.centerx = background.get_rect().centerx # set text
+                                                        # x-position
+                                                        # centered
+        textpos.centery = background.get_rect().centery + alterPos # set text
+                                                        # y-position
+                                                        # centered
+            
+    window.blit(stext, textpos) # Blits the text to the coordinates
     pygame.display.flip() # Flip the display
     return(textsize,textpos)
 
@@ -800,26 +897,37 @@ def vprogressionbar_grow(width,nb_syll,time_per_syll,bar_color): # Need to
 
 def text_progressionbar_grow(space, nb_syll, time_per_syll, bar_color): # Need to
     # compute time from beginning to end of window
-    cwidth=int(0)
-    width = int(space[2]) #int(0.02*window_size[0])
+    #
+    # TODO: set default value for direction in order to keep compatibility with
+    # previous versions not implementing direction.
+    #
+    targetWidth=int(0)
+    if textdirection=='RTL':
+        maxWidth = int(space[2]) #int(0.02*window_size[0])  # Arrival (right for LTR) or Initiation (right for RTL)
+        xref = int(space[0])
+    else:
+        maxWidth = int(space[2]) #int(0.02*window_size[0])  # Arrival (right for LTR) or Initiation (right for RTL)
+        xref = int(space[0])
     height= int(space[3]) #initial vertical height
-    xref = int(space[0])
     yref = int(space[1]+height)
     if DEBUG:
-        print(xref, yref, width, height)
+        print(xref, yref, maxWidth, height)
     
     pygame.display.flip()
     #pause(1000)
     nbsteps = 40 #100
-    stepsize = width/nbsteps #
+    stepsize = maxWidth/nbsteps #
     if DEBUG:
         print(stepsize)
-    while cwidth <= width:
-        hbar = pygame.Surface((cwidth,height))
+    while targetWidth <= maxWidth:
+        hbar = pygame.Surface((targetWidth,height))
         hbar = hbar.convert()
         hbar.fill(bar_color)
-        window.blit(hbar, (xref,yref))
-        cwidth+=int(stepsize)
+        if textdirection == 'RTL':
+            window.blit(hbar, (xref+maxWidth-targetWidth, yref))
+        else:
+            window.blit(hbar, (xref, yref))
+        targetWidth+=int(stepsize)
         #               print(nb_syll,time_per_syll,window_size[1],stepsize)
         #               print((nb_syll*time_per_syll/nbsteps),"\n")
         if DEBUG:
