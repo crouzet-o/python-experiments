@@ -767,7 +767,9 @@ def display_text(text, dfont=pygame.font.Font(myfont, fontsize)): # Display text
     if textsize[0] > .5*window_size[0]:
         print(textsize[0], window_size[0])
         yShift = int(window_size[1]/3)
-        wtext = textwrap.wrap(text, width = 70)
+        # Estimate wrap size depending on sentence visual width (which depends on fontsize)
+        wrapSize = 70*(84*20/textsize[0])
+        wtext = textwrap.wrap(text, width = wrapSize)
         if DEBUG:
             print(wtext)
             print(textsize[0], window_size[0])

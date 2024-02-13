@@ -25,7 +25,10 @@
 # Quelques exemples de lignes de commande pour lancer le programme :
 
 En arabe :
-./progression.py --lang ar --fontsize 40 --col 3 --sampa 4 --sylls 9 --id loc1 --rep 1 --timepersyll 100 --blocksize 5 --isi 1000 --progbar --trialpreread listes/liste-mohamad-rateinfo.csv 
+./progression.py --lang ar --fontsize 90 --colstim 3 --colsampa 4 --colNsyll 9 --id test0 --rep 1 --timepersyll 140 --blocksize 5 --isi 1000  --training True listes/liste-mohamad-rateinfo.csv 
+
+ 
+# Anciens exemples à mettre à jour
 
 En chinois :
 ./progression.py --lang cjk --fontsize 40 --col 2 --sylls 1 --id loc1 --rep 1 --timepersyll 300 --blocksize 25 --isi 1000 2020-jue-master2-aff.csv
