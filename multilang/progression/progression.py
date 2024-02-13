@@ -525,7 +525,7 @@ def catchRepeatTrainingBool():
     while grab:
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN: # or event.type == KEYUP: # QUIT event or keypressed or keydepressed
-                if event.key == pygame.K_RETURN | event.key == pygame.K_KP_ENTER:
+                if (event.key == pygame.K_RETURN or event.key == pygame.K_KP_ENTER):
                     repeatTraining = True
                 else:
                     repeatTraining = False
