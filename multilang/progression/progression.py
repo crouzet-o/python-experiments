@@ -430,7 +430,7 @@ def main():
                 trainingSize = round(min(len(liste), trainingSize))
             repeatTraining=True
             while repeatTraining==True:
-                pause(ITI)
+                pause(1000)
                 blank_bg(bgcolor)
                 random.shuffle(liste)
                 for i in range(trainingSize):
@@ -446,6 +446,8 @@ def main():
                 else:
                     wait_text("Si vous souhaitez refaire un entraînement, appuyez sur la touche ENTREE.")
                 repeatTraining = catchRepeatTrainingBool()
+                blank_bg(bgcolor)
+                pause(1000)
 
 
 
