@@ -313,9 +313,11 @@ if language == 'ar':
         #myexpefont = pygame.font.match_font('arab,kacstbook,scheherazade,alarabiya,kacst')
         myexpefont = pygame.font.match_font('timesnewroman,arial,tholoth,scheherazade,tholoth,kacstqurn')
         myexpefontsize = 88
+        print(myexpefont)
         textdirection='RTL'
 elif language == 'jp':
         myexpefont = pygame.font.match_font('ipaexmincho,japan')
+        print(myexpefont)
         myexpefontsize = 48
         textdirection='LTR'
 elif language == 'cjk':
@@ -419,10 +421,17 @@ def main():
             #else:
             #    splash_text("Appuyez sur la barre ESPACE pour commencer l'expérience.")
             pause(ITI)
+            if DEBUG:
+                trainingSize = 3
+            else:
+                trainingSize = 10
+                trainingSize = round(min(len(liste), trainingSize))
             repeatTraining=True
             while repeatTraining==True:
+                blank_bg(bgcolor)
+                pause(ITI)
                 random.shuffle(liste)
-                for i in range(round(min(len(liste)/5, 10))):
+                for i in range(trainingSize):
                     j="training"
                     #catchpause()
                     runTheTrial(liste, i, j)
@@ -480,7 +489,7 @@ def catchpause():
             if event.key == pygame.K_ESCAPE or event.key == pygame.K_SPACE:
                 if language == "ar":
                     splash_text("(ARABIC) Appuyez sur la barre ESPACE pour reprendre l'enregistrement...")
-                elif language == "ar":
+                elif language == "cjk":
                     splash_text("请按任意键开始。")
                 else:
                     splash_text("Appuyez sur la barre ESPACE pour reprendre l'enregistrement ou sur ESC pour quitter...")
@@ -527,8 +536,10 @@ def catchRepeatTrainingBool():
 
 def blockpause():
         pygame.event.pump()
-        if language == "cjk":
-            display_textexpe("请按任意键开始。")
+        if language == "ar":
+            display_text("(ARABIC) Appuyez sur la barre ESPACE pour reprendre l'enregistrement")
+        elif language == "cjk":
+            display_text("请按任意键开始。")
         else:
             display_text("Appuyez sur la barre ESPACE pour reprendre l'enregistrement")
         pyl.waitforkeypress()
@@ -657,6 +668,7 @@ def readingphase(liste, i, j):
     
 
 def splash_text(text):
+    # blank then display + wait for keypress then blank
     blank_bg(bgcolor)
     display_text(text)
     pyl.waitforkeypress()
@@ -664,6 +676,7 @@ def splash_text(text):
 
 
 def wait_text(text):
+    # blank then display alone
     blank_bg(bgcolor)
     display_text(text)
 
