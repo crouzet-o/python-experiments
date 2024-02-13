@@ -1,0 +1,34 @@
+
+<cfg>
+
+  <language lang="fr", familiarisation="false", warning="false", train="true", progbar="true">
+    <welcome_msg>Bonjour. Nous allons vous expliquer ce que vous devrez faire dans le cadre de cette expérience.</welcome_msg>
+    <familiarisation_msg>Nous commençons par vous présenter les séquences que vous allez voir afin de vous familiariser avec elles.</familiarisation_msg>
+    <train_msg>L'entraînement va commencer. Il a pour but de vous familiariser avec la tâche.</train_msg>
+    <repeatTrain_msg>Si vous souhaitez vous entraîner à nouveau, appuyez sur la touche ENTREE.</repeatTrain_msg>
+    <startexpe_msg>L'entraînement est terminé. L'expérience proprement dite va commencer.</startexpe_msg>
+    <continue_msg>Vous pouvez faire une pause. Appuyez sur la barre espace pour reprendre l'expérience.</continue_msg>
+    <end_msg>L'expérience est terminée. Merci pour votre participation.</end_msg>
+  </language>
+
+  <language lang="ar", familiarisation="false", warning="false", train="true", progbar="true">
+    <welcome_msg>(ARABIC TR.) Bonjour. Nous allons vous expliquer ce que vous devrez faire dans le cadre de cette expérience.</welcome_msg>
+    <familiarisation_msg>(ARABIC TR.) Nous commençons par vous présenter les séquences que vous allez voir afin de vous familiariser avec elles.</familiarisation_msg>
+    <train_msg>(ARABIC TR.) L'entraînement va commencer. Il a pour but de vous familiariser avec la tâche.</train_msg>
+    <repeatTrain_msg>(ARABIC TR.) Si vous souhaitez vous entraîner à nouveau, appuyez sur la touche ENTREE.</repeatTrain_msg>
+    <startexpe_msg>(ARABIC TR.) L'entraînement est terminé. L'expérience proprement dite va commencer.</startexpe_msg>
+    <continue_msg>(ARABIC TR.) Vous pouvez faire une pause. Appuyez sur la barre espace pour reprendre l'expérience.</continue_msg>
+    <end_msg>(ARABIC TR.) L'expérience est terminée. Merci pour votre participation.</end_msg>
+  </language>
+
+  <language lang="cjk", familiarisation="false", warning="false", train="true", progbar="true">
+    <welcome_msg>(CHINESE TR.) Bonjour. Nous allons vous expliquer ce que vous devrez faire dans le cadre de cette expérience.</welcome_msg>
+    <familiarisation_msg>(CHINESE TR.) Nous commençons par vous présenter les séquences que vous allez voir afin de vous familiariser avec elles.</familiarisation_msg>
+    <train_msg>(CHINESE TR.) L'entraînement va commencer. Il a pour but de vous familiariser avec la tâche.</train_msg>
+    <repeatTrain_msg>(CHINESE TR.) Si vous souhaitez vous entraîner à nouveau, appuyez sur la touche ENTREE.</repeatTrain_msg>
+    <startexpe_msg>(CHINESE TR.) L'entraînement est terminé. L'expérience proprement dite va commencer.</startexpe_msg>
+    <continue_msg>(CHINESE TR.) Vous pouvez faire une pause. Appuyez sur la barre espace pour reprendre l'expérience.</continue_msg>
+    <end_msg>(CHINESE TR.) L'expérience est terminée. Merci pour votre participation.</end_msg>
+  </language>
+
+</cfg>
