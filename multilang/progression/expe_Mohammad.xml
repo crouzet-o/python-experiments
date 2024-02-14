@@ -8,17 +8,17 @@
     <repeatTrain_msg>Si vous souhaitez vous entraîner à nouveau, appuyez sur la touche ENTREE.</repeatTrain_msg>
     <startexpe_msg>L'entraînement est terminé. L'expérience proprement dite va commencer.</startexpe_msg>
     <continue_msg>Vous pouvez faire une pause. Appuyez sur la barre espace pour reprendre l'expérience.</continue_msg>
-    <end_msg>L'expérience est terminée. Merci pour votre participation.</end_msg>
+    <end_msg>Cette phase de l'expérience est terminée. Merci de votre contribution.</end_msg>
   </language>
 
   <language lang="ar", familiarisation="false", warning="false", train="true", progbar="true">
     <welcome_msg>(ARABIC TR.) Bonjour. Nous allons vous expliquer ce que vous devrez faire dans le cadre de cette expérience.</welcome_msg>
     <familiarisation_msg>(ARABIC TR.) Nous commençons par vous présenter les séquences que vous allez voir afin de vous familiariser avec elles.</familiarisation_msg>
-    <train_msg>(ARABIC TR.) L'entraînement va commencer. Il a pour but de vous familiariser avec la tâche.</train_msg>
-    <repeatTrain_msg>(ARABIC TR.) Si vous souhaitez vous entraîner à nouveau, appuyez sur la touche ENTREE.</repeatTrain_msg>
-    <startexpe_msg>(ARABIC TR.) L'entraînement est terminé. L'expérience proprement dite va commencer.</startexpe_msg>
+    <train_msg>بداية مرحلة التمرين. إقرأ الجمل التالية ومن ثم إضغط على مفتاح المسافة للبدء بالتسجيل.</train_msg>
+    <repeatTrain_msg>إذا أردت إعادة مرحلة التمرين إضغط على مفتاح الإدخال.</repeatTrain_msg>
+    <startexpe_msg>التجربة على وشك البدء. إضغط مفتاح المسافة للبدء.</startexpe_msg>
     <continue_msg>(ARABIC TR.) Vous pouvez faire une pause. Appuyez sur la barre espace pour reprendre l'expérience.</continue_msg>
-    <end_msg>(ARABIC TR.) L'expérience est terminée. Merci pour votre participation.</end_msg>
+    <end_msg>هذه التجربة قد إنتهت. شكرا جزيلا للمشاركة.</end_msg>
   </language>
 
   <language lang="cjk", familiarisation="false", warning="false", train="true", progbar="true">
